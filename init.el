@@ -9,15 +9,23 @@
 (defcustom w/font-and-size "DejaVu Sans Mono-16"
   "The font and its size.")
 
-(defvar w/emacs-directory (file-name-directory load-file-name)
-  "The actual .emacs.d directory for cases like trying it without be `user-emacs-directory'.")
-
 ;; For package.el
 (when w/http-proxy
   (setq url-proxy-services `(("http" . ,w/http-proxy)
                              ("https" . ,w/http-proxy))))
 
 ;;;; tweak default settings
+
+;;; separate session files
+(setq recentf-save-file "~/.emacs.local.d/recentf")
+(setq tramp-histfile-override "~/.emacs.local.d/.tramp_history")
+(setq project-list-file "~/.emacs.local.d/projects")
+(setq savehist-file "~/.emacs.local.d/history") ; minibuffer history
+(setq bookmark-file "~/.emacs.local.d/bookmarks")
+(setq company-statistics-file "~/.emacs.local.d/company-statistics-cache.el")
+;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
+(setq custom-file "~/.emacs.local.d/custom-set-variables.el")
+(load custom-file 'noerror)
 
 ;;; UI
 (load-theme 'leuven 'no-confirm)
@@ -28,10 +36,6 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-
-;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
-(setq custom-file (concat w/emacs-directory "custom-set-variables.el"))
-(load custom-file 'noerror)
 
 ;;; packages
 (setq package-archives '(
@@ -90,7 +94,7 @@
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))
-      (message "package %s not found in archive")
+      (message "package %s not found in archive" pkg)
       (package-refresh-contents)
       (setq refreshed-p t))
     (unless (package-installed-p pkg)
@@ -100,6 +104,13 @@
 ;; don't auto-save and back up files
 (setq auto-save-default nil
       make-backup-files nil)
+
+;;;; customize built-in features
+
+;;; settings
+(setq history-length 8000
+      savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
+(savehist-mode)
 
 ;;;; key bindings
 ;;; built-in feature enhancements
@@ -118,7 +129,7 @@
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C-c C-r") #'ivy-resume)
 
-;;; C-c user key bindings
+;;; key bindings following the convention
 (global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
 (global-set-key [f8] #'compile)
 
