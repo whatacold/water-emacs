@@ -9,7 +9,10 @@
 (defcustom w/font-and-size "DejaVu Sans Mono-16"
   "The font and its size.")
 
-;; For package.el
+(defcustom w/python-venv nil
+  "The Python virtual environment.")
+
+;; for package.el etc.
 (when w/http-proxy
   (setq url-proxy-services `(("http" . ,w/http-proxy)
                              ("https" . ,w/http-proxy))))
@@ -17,18 +20,22 @@
 ;;;; tweak default settings
 
 ;;; separate session files
+(unless (file-directory-p "~/.emacs.local.d/")
+  (make-directory "~/.emacs.local.d/"))
 (setq recentf-save-file "~/.emacs.local.d/recentf")
 (setq tramp-histfile-override "~/.emacs.local.d/.tramp_history")
 (setq project-list-file "~/.emacs.local.d/projects")
 (setq savehist-file "~/.emacs.local.d/history") ; minibuffer history
 (setq bookmark-file "~/.emacs.local.d/bookmarks")
 (setq company-statistics-file "~/.emacs.local.d/company-statistics-cache.el")
+(setq transient-history-file "~/.emacs.local.d/transient/history.el")
+(setq auto-save-list-file-prefix "~/.emacs.local.d/auto-save-list/.saves-")
 ;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
 (setq custom-file "~/.emacs.local.d/custom-set-variables.el")
 (load custom-file 'noerror)
 
 ;;; UI
-(load-theme 'leuven 'no-confirm)
+;;(load-theme 'leuven 'no-confirm)
 ;; font & font size
 (add-to-list 'default-frame-alist
              `(font . ,w/font-and-size))
@@ -86,11 +93,15 @@
                    ggtags
                    hl-todo
                    emmet-mode
+		   csv-mode
+		   eglot
+		   pyvenv
 
-                   ;; others
+                   ;; misc
                    expand-region
                    keycast
                    subed
+		   which-key
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))
@@ -101,6 +112,7 @@
       (package-install pkg))))
 
 ;;; others
+(fset 'yes-or-no-p 'y-or-n-p)
 ;; don't auto-save and back up files
 (setq auto-save-default nil
       make-backup-files nil)
@@ -109,45 +121,22 @@
 
 ;;; settings
 (setq history-length 8000
+      history-delete-duplicates t
       savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
 (savehist-mode)
 
-;;;; key bindings
-;;; built-in feature enhancements
-(global-set-key (kbd "M-g g") #'avy-goto-line) ; goto-line
-(global-set-key (kbd "C-x C-b") #'ibuffer) ; list-buffers
-(global-set-key (kbd "M-/") #'hippie-expand) ; dabbrev-expand
-(global-set-key (kbd "C-s") #'swiper) ; isearch
-(global-set-key (kbd "C-x b") #'ivy-switch-buffer) ; switch-to-buffer
-(global-set-key (kbd "M-x") #'counsel-M-x) ; execute-extended-command
-(global-set-key (kbd "M-y") #'counsel-yank-pop) ; yank-pop
-(global-set-key (kbd "C-h v") #'counsel-describe-variable)
-(global-set-key (kbd "C-h f") #'counsel-describe-function)
-(global-set-key (kbd "C-x o") #'ace-window) ; other-window
+(server-start)
 
-;;; other established & non C-c key bindings
-(global-set-key (kbd "C-=") #'er/expand-region)
-(global-set-key (kbd "C-c C-r") #'ivy-resume)
+;;;; customize packages
+(setq csv-align-max-width 100)
 
-;;; key bindings following the convention
-(global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
-(global-set-key [f8] #'compile)
-
-;; searching
-(global-set-key (kbd "C-c s i") #'counsel-rg)
-
-;; jumping around
-(global-set-key (kbd "C-c j c") #'avy-goto-char)
-(global-set-key (kbd "C-c j o") #'ace-link)
-(global-set-key (kbd "C-c j m") #'counsel-imenu)
-(global-set-key (kbd "C-c j r") #'counsel-recentf)
-(global-set-key (kbd "C-c j p") #'flymake-goto-prev-error)
-(global-set-key (kbd "C-c j n") #'flymake-goto-next-error)
-
-;; org-mode
-(global-set-key (kbd "C-c o c") #'org-capture)
-(global-set-key (kbd "C-c o a") #'org-agenda)
-(global-set-key (kbd "C-c o l") #'org-store-link)
+;;;; loading other settings
+(let ((dir "~/.emacs.d/lisp"))
+  (when (file-directory-p dir)
+    (dolist (file (directory-files dir))
+      (when (string-match-p "^[[:digit:]]+-.*\\.el$" file)
+	(message "loading %s" (expand-file-name file dir))
+	(load-file (expand-file-name file dir))))))
 
 ;;;; ending
 (load "~/.emacs.local.d/init-after" 'noerror)
