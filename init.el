@@ -22,6 +22,7 @@
 ;;; separate session files
 (unless (file-directory-p "~/.emacs.local.d/")
   (make-directory "~/.emacs.local.d/"))
+(setq package-user-dir "~/.emacs.local.d/elpa")
 (setq recentf-save-file "~/.emacs.local.d/recentf")
 (setq tramp-histfile-override "~/.emacs.local.d/.tramp_history")
 (setq project-list-file "~/.emacs.local.d/projects")
