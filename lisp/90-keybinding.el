@@ -35,3 +35,9 @@
 (global-set-key (kbd "C-c o c") #'org-capture)
 (global-set-key (kbd "C-c o a") #'org-agenda)
 (global-set-key (kbd "C-c o l") #'org-store-link)
+
+;; eglot
+(eval-after-load 'eglot
+  '(progn
+     (define-key eglot-mode-map (kbd "C-c <tab>") #'company-complete) ; initiate the completion manually
+     (define-key eglot-mode-map (kbd "C-c e r") #'eglot-rename)))
