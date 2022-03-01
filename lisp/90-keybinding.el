@@ -18,6 +18,7 @@
 
 ;;; key bindings following the convention
 (global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
+(global-set-key (kbd "C-c d") #'w/duplicate-line)
 (global-set-key [f8] #'compile)
 
 ;; searching
