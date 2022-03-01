@@ -13,4 +13,12 @@
 
 
 ;;; org-mode
-(setq org-adapt-indentation nil)
+(setq org-adapt-indentation nil) ; don't indent to outline node level
+
+(defun w/org-mode-hook-setup ()
+  (org-num-mode)
+
+  ;; (setq truncate-lines nil) ; display wrapped lines instead of truncated lines
+  ;; (setq word-wrap t)
+  )
+(add-hook 'org-mode-hook #'w/org-mode-hook-setup)
