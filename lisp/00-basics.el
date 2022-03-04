@@ -1,3 +1,7 @@
+;;; basics
+(setq kill-ring-max 1000)
+(setq-default indent-tabs-mode nil) ; no TAB
+
 ;;; auto save files
 ;; (defvar w/auto-save--timer nil)
 ;;
@@ -24,6 +28,16 @@
 (setq auto-save-visited-interval 2)
 (auto-save-visited-mode)
 
+(setq set-mark-command-repeat-pop t) ; C-u SPC SPC goes to the last last mark
+
+;;; coding system
+(prefer-coding-system 'chinese-gbk)
+(prefer-coding-system 'utf-8)
+(modify-coding-system-alist 'file "\\.sh\\'" 'unix)
+
+;;; windows
+;; ace-window
+(setq aw-scope 'frame)
 
 ;;; dired
 (setq dired-dwim-target t)
@@ -51,4 +65,5 @@
   (next-line 1)
   (yank))
 
-(setq recentf-max-saved-items 10000)
+(setq recentf-max-saved-items 10000
+      recentf-auto-cleanup 'never)

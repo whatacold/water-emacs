@@ -12,6 +12,13 @@
 (global-set-key (kbd "M-x") #'counsel-M-x) ; execute-extended-command
 (global-set-key (kbd "M-y") #'counsel-yank-pop) ; yank-pop
 
+;;; unusual key bindings
+;; searching
+;; workaround to distinguish `C-i' from 'TAB'
+;; https://stackoverflow.com/a/11319885/910978
+(define-key input-decode-map (kbd "C-i") (kbd "H-i")) ; C-i == TAB by default
+(global-set-key (kbd "H-i") #'counsel-rg)
+
 ;;; other established & non C-c key bindings
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C-c C-r") #'ivy-resume)
@@ -20,9 +27,6 @@
 (global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
 (global-set-key (kbd "C-c d") #'w/duplicate-line)
 (global-set-key [f8] #'compile)
-
-;; searching
-(global-set-key (kbd "C-c s i") #'counsel-rg)
 
 ;; jumping around
 (global-set-key (kbd "C-c j c") #'avy-goto-char)
