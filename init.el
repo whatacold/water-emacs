@@ -82,12 +82,13 @@
 
                    ;; reading
                    elfeed elfeed-org
-                   hl-todo
                    highlight-symbol
 
                    ;; writing
                    easy-hugo
                    org-download
+		   markdown-mode
+                   wgrep
 
                    ;; programming
                    company-c-headers
@@ -96,10 +97,13 @@
                    cider
                    ggtags
                    hl-todo
-                   emmet-mode
+                   emmet-mode ; html
+		   php-mode
 		   csv-mode
 		   eglot
 		   pyvenv
+		   go-mode
+                   protobuf-mode
 
                    ;; misc
                    expand-region
