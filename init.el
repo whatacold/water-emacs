@@ -6,6 +6,9 @@
 (defcustom w/http-proxy nil
   "http proxy url without the scheme, e.g. 127.0.0.1:8000.")
 
+(defcustom w/theme 'tsdh-light
+  "The UI theme.")
+
 (defcustom w/font-and-size "DejaVu Sans Mono-16"
   "The font and its size.")
 
@@ -36,7 +39,7 @@
 (load custom-file 'noerror)
 
 ;;; UI
-;;(load-theme 'leuven 'no-confirm)
+(load-theme w/theme 'no-confirm)
 ;; font & font size
 (add-to-list 'default-frame-alist
              `(font . ,w/font-and-size))
