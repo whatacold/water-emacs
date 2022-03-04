@@ -1,4 +1,6 @@
-;;;; company
+;;; company
+(setq company-minimum-prefix-length 2) ; 'fo' triggers company to start completion
+
 (add-hook 'after-init-hook 'global-company-mode)
 
 (eval-after-load 'company
@@ -22,3 +24,6 @@
   ;; (setq word-wrap t)
   )
 (add-hook 'org-mode-hook #'w/org-mode-hook-setup)
+
+;;; others
+(require 'iedit) ; will bind C-; internally

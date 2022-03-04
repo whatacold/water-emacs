@@ -25,5 +25,4 @@
 ;;; modes
 (electric-pair-mode)
 (show-paren-mode)
-(iedit-mode)
 

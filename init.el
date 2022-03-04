@@ -34,6 +34,7 @@
 (setq company-statistics-file "~/.emacs.local.d/company-statistics-cache.el")
 (setq transient-history-file "~/.emacs.local.d/transient/history.el")
 (setq auto-save-list-file-prefix "~/.emacs.local.d/auto-save-list/.saves-")
+(setq smex-save-file "~/.emacs.local.d/.smex-items")
 ;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
 (setq custom-file "~/.emacs.local.d/custom-set-variables.el")
 (load custom-file 'noerror)
@@ -63,7 +64,7 @@
   (dolist (pkg '(s company company-statistics
                    scratch
                    exec-path-from-shell
-                   ivy swiper counsel
+                   smex ivy swiper counsel ; ivy will use the command data of smex
                    yasnippet yasnippet-snippets
                    auto-yasnippet ; create live snippets and expand them
                    ivy-yasnippet
