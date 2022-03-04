@@ -18,6 +18,12 @@
 ;;; eglot
 (setq eldoc-echo-area-use-multiline-p nil)
 
+;;; C/C++
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode))))
+
 ;;; python
 (when w/python-venv
   (pyvenv-activate w/python-venv))
