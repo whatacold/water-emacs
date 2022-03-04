@@ -40,6 +40,10 @@
 ;; ace-window
 (setq aw-scope 'frame)
 
+;;; mode line
+;; not show vc info
+(setq vc-handled-backends nil) ; so that `vc-mode' is nil for any buffer
+
 ;;; dired
 (setq dired-dwim-target t)
 
