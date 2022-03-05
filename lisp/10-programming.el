@@ -39,3 +39,9 @@
 (electric-pair-mode)
 (show-paren-mode)
 
+;;; misc
+(defun w/urxvt ()
+  "Open a new urxvt terminal based on `default-directory' of the current buffer."
+  (interactive)
+  (let ((urxvt "urxvt256c-ml"))
+    (start-process urxvt nil urxvt "-cd" (expand-file-name "./"))))
