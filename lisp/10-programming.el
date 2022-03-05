@@ -39,6 +39,37 @@
 (electric-pair-mode)
 (show-paren-mode)
 
+;;; elisp debugging
+(defvar w/trace-subprocess-p nil
+  "Whether to trace subprocess creating or not.")
+
+(defun w/toggle-trace-subprocess ()
+  "Toggle whether to trace subprocess creating."
+  (interactive)
+  (setq w/trace-subprocess-p (not w/trace-subprocess-p))
+  (when w/trace-subprocess-p
+    (message "Trace subprocess creating.")))
+
+(defun w/quote-argument (arg)
+  "Double quote ARG."
+  (concat "\"" arg "\""))
+
+(define-advice start-process (:before (name buffer program &rest program-args) trace)
+  (when w/trace-subprocess-p
+    (message "Trace start-process: name: %s, buffer: %s, program and args: %s %s"
+             name buffer program
+             (mapconcat #'w/quote-argument program-args " "))))
+
+(define-advice shell-command-to-string (:before (command) trace)
+  (when w/trace-subprocess-p
+    (message "Trace shell-command-to-string: %s" command)))
+
+(define-advice call-process (:before (program &optional infile destination display &rest args) trace)
+  (when w/trace-subprocess-p
+    (message "Trace call-process: %s %s"
+             program
+             (mapconcat #'w/quote-argument args " "))))
+
 ;;; misc
 (defun w/urxvt ()
   "Open a new urxvt terminal based on `default-directory' of the current buffer."
