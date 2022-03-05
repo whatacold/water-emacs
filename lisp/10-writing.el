@@ -20,7 +20,7 @@
 (defun w/org-mode-hook-setup ()
   (org-num-mode)
 
-  ;; (setq truncate-lines nil) ; display wrapped lines instead of truncated lines
+  (setq truncate-lines nil) ; display wrapped lines instead of truncated lines
   ;; (setq word-wrap t)
   )
 (add-hook 'org-mode-hook #'w/org-mode-hook-setup)

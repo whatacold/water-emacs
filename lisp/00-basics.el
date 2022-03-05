@@ -75,3 +75,7 @@
 
 (setq recentf-max-saved-items 10000
       recentf-auto-cleanup 'never)
+
+;; https://oremacs.com/2015/01/17/setting-up-ediff/
+(setq ediff-window-setup-function #'ediff-setup-windows-plain
+      ediff-split-window-function #'split-window-horizontally)
