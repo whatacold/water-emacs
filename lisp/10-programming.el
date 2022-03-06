@@ -15,6 +15,17 @@
 
 (setq project-find-functions '(w/project-try-local project-try-vc))
 
+(defun w/project-rg (&optional specify-project-p)
+  "Grep files using `rg' in the current project.
+
+If `specify-project-p' is non-nil, prompt users to select a project."
+  (interactive "P")
+  (let* ((pr (project-current t))
+         (root (if specify-project-p
+                   (project-prompt-project-dir)
+                 (project-root pr))))
+    (counsel-rg "" root nil (format "Grep files in %s: " root))))
+
 ;;; eglot
 (setq eldoc-echo-area-use-multiline-p nil)
 

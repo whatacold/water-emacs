@@ -46,3 +46,6 @@
   '(progn
      (define-key eglot-mode-map (kbd "C-c <tab>") #'company-complete) ; initiate the completion manually
      (define-key eglot-mode-map (kbd "C-c e r") #'eglot-rename)))
+
+;; project.el
+(define-key project-prefix-map "i" #'w/project-rg)
