@@ -1,5 +1,8 @@
 ;;; basics
-(put 'erase-buffer 'disabled nil) ; enable it
+;; enable these
+(put 'erase-buffer 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 (setq kill-ring-max 1000)
 (setq-default indent-tabs-mode nil) ; no TAB
 
