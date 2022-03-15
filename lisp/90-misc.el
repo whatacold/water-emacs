@@ -14,3 +14,5 @@
 (setq which-key-allow-imprecise-window-fit t) ; performance
 (which-key-mode)
 
+;;; misc
+(midnight-mode) ; (clean-buffer-list) automatically

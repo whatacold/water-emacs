@@ -1,5 +1,7 @@
 ;;; company
-(setq company-minimum-prefix-length 2) ; 'fo' triggers company to start completion
+(setq company-dabbrev-downcase nil
+      company-dabbrev-ignore-case nil ; keep candidates as-is
+      company-minimum-prefix-length 2) ; e.g. 'fo' triggers company to start completion
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -27,3 +29,4 @@
 
 ;;; others
 (require 'iedit) ; will bind C-; internally
+(defalias #'cleanup-buffer #'whitespace-cleanup)

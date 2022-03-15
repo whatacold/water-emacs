@@ -3,8 +3,12 @@
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+(setq initial-scratch-message nil)
 (setq kill-ring-max 1000)
 (setq-default indent-tabs-mode nil) ; no TAB
+;; https://www.reddit.com/r/emacs/comments/fts7ap/command_attempted_to_use_minibuffer_while_in/
+(setq enable-recursive-minibuffers t)
+(minibuffer-depth-indicate-mode 1)
 
 ;;; auto save files
 ;; (defvar w/auto-save--timer nil)
@@ -78,6 +82,7 @@
 
 (setq recentf-max-saved-items 10000
       recentf-auto-cleanup 'never)
+(recentf-mode)
 
 ;; https://oremacs.com/2015/01/17/setting-up-ediff/
 (setq ediff-window-setup-function #'ediff-setup-windows-plain

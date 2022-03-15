@@ -106,12 +106,14 @@
 		   pyvenv
 		   go-mode
                    protobuf-mode
+                   yaml-mode
 
                    ;; misc
                    expand-region
                    keycast
                    subed
 		   which-key
+                   docker
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))

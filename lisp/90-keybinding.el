@@ -35,6 +35,7 @@
 (global-set-key (kbd "C-c j r") #'counsel-recentf)
 (global-set-key (kbd "C-c j p") #'flymake-goto-prev-error)
 (global-set-key (kbd "C-c j n") #'flymake-goto-next-error)
+(global-set-key (kbd "C-c j t") #'ff-find-other-file)
 
 ;; org-mode
 (global-set-key (kbd "C-c o c") #'org-capture)
