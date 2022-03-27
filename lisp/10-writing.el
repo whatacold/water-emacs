@@ -27,6 +27,8 @@
   )
 (add-hook 'org-mode-hook #'w/org-mode-hook-setup)
 
+(add-hook 'org-mode-hook #'valign-mode)
+
 ;;; others
 (require 'iedit) ; will bind C-; internally
 (defalias #'cleanup-buffer #'whitespace-cleanup)

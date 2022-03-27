@@ -89,6 +89,7 @@
                    ;; writing
                    easy-hugo
                    org-download
+                   valign               ; pixel-wise visual alignment of tables
 		   markdown-mode
                    wgrep
 
