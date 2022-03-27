@@ -51,6 +51,11 @@
 ;; not show vc info
 (setq vc-handled-backends nil) ; so that `vc-mode' is nil for any buffer
 
+;; hide these modes from the mode line
+(dolist (mode '(eldoc-mode which-key-mode ivy-mode yas-minor-mode
+                           company-mode))
+  (diminish mode))
+
 ;;; dired
 (setq dired-dwim-target t)
 
