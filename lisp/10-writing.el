@@ -29,6 +29,16 @@
 
 (add-hook 'org-mode-hook #'valign-mode)
 
+;;; yasnippet
+;; enable yasnippet based on the major mode
+(dolist (hook '(prog-mode-hook
+                text-mode-hook
+                ;; below modes does NOT inherit from prog-mode
+                cmake-mode-hook
+                web-mode-hook
+                scss-mode-hook))
+  (add-hook hook #'yas-minor-mode))
+
 ;;; others
 (require 'iedit) ; will bind C-; internally
 (defalias #'cleanup-buffer #'whitespace-cleanup)
