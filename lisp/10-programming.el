@@ -5,9 +5,9 @@
 (defun w/project-try-local (dir)
   "Determine if DIR is a non-Git project."
   (catch 'ret
-    (let ((pr-flags '((".emacs-project")
-                      ("eglot-project.txt" "go.mod" "Cargo.toml" "project.clj" "pom.xml" "package.json") ;; higher priority
-                      ("Makefile" "README.org" "README.md"))))
+    (let ((pr-flags '((".emacs-project" ".git")
+                      ("go.mod" "Cargo.toml" "project.clj" "pom.xml" "package.json") ;; higher priority
+                      )))
       (dolist (current-level pr-flags)
         (dolist (f current-level)
           (when-let ((root (locate-dominating-file dir f)))
