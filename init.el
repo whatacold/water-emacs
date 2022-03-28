@@ -15,6 +15,9 @@
 (defcustom w/python-venv nil
   "The Python virtual environment.")
 
+(defcustom w/company-ispell-dict nil
+  "English dict file for company completion, one word per line.")
+
 ;; for package.el etc.
 (when w/http-proxy
   (setq url-proxy-services `(("http" . ,w/http-proxy)

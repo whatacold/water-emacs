@@ -9,7 +9,11 @@
   '(progn
      (company-statistics-mode) ; suggest candidates by stats
 
-     (add-to-list 'company-backends 'company-c-headers)
+     (add-to-list 'company-backends #'company-c-headers)
+
+     (when w/company-ispell-dict
+       (setq company-ispell-dictionary (file-truename w/company-ispell-dict))
+       (add-to-list 'company-backends #'company-ispell))
 
      (setq company-show-numbers t ; press M-number to choose candidate
            company-idle-delay 0.2
