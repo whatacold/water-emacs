@@ -34,6 +34,9 @@
 (add-hook 'org-mode-hook #'valign-mode)
 
 ;;; yasnippet
+(eval-after-load 'yasnippet
+  '(yas-global-mode))
+
 ;; enable yasnippet based on the major mode
 (dolist (hook '(prog-mode-hook
                 text-mode-hook

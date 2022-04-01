@@ -15,6 +15,9 @@
 (defcustom w/python-venv nil
   "The Python virtual environment.")
 
+(defcustom w/yasnippet-dir "~/.emacs.local.d/snippets/"
+  "Private yasnippet snippet dir.")
+
 (defcustom w/company-ispell-dict nil
   "English dict file for company completion, one word per line.")
 
@@ -39,7 +42,7 @@
 (setq auto-save-list-file-prefix "~/.emacs.local.d/auto-save-list/.saves-")
 (setq smex-save-file "~/.emacs.local.d/.smex-items")
 (setq eshell-history-file-name "~/.emacs.local.d/eshell/history")
-(setq yas-snippet-dirs '("~/.emacs.local.d/snippets/"))
+(setq yas-snippet-dirs '(w/yasnippet-dir))
 ;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
 (setq custom-file "~/.emacs.local.d/custom-set-variables.el")
 (load custom-file 'noerror)
