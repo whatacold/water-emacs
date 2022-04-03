@@ -47,6 +47,16 @@
 ;; ace-window
 (setq aw-scope 'frame)
 
+(advice-add #'ace-window :around
+            (lambda (oldfun &rest arg)
+              "Prefixed with three C-u's, kill the buffer of that window."
+              (if (/= 64 (car arg))
+                  (apply oldfun arg)
+                (save-window-excursion
+                  (apply oldfun arg)
+                  (kill-buffer))))
+            '((name . kill-buffer)))
+
 ;;; mode line
 ;; not show vc info
 (setq vc-handled-backends nil) ; so that `vc-mode' is nil for any buffer
