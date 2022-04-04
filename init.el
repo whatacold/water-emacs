@@ -84,7 +84,7 @@
                    ;; UI
                    beacon ; for fun
                    cnfonts
-                   diminish ; for hiding specified minor modes
+                   delight ; for hiding specified minor modes; better that diminish
 
                    ;; jumping around
                    avy ace-link ace-pinyin

@@ -61,6 +61,18 @@
 ;; not show vc info
 (setq vc-handled-backends nil) ; so that `vc-mode' is nil for any buffer
 
+;; hide minor modes from the mode line
+(require 'delight)
+(delight '((ivy-mode nil "ivy")
+           (eldoc-mode nil "eldoc")
+           (which-key-mode nil "which-key")
+           (yas-minor-mode nil "yasnippet")
+           (company-mode nil "company")
+           (auto-revert-mode nil "autorevert")
+           ;; org-mode minor modes
+           (org-num-mode nil "org-num")
+           (valign-mode nil "valign")))
+
 ;;; dired
 (setq dired-dwim-target t)
 
