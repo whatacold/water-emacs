@@ -146,8 +146,6 @@
       savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
 (savehist-mode)
 
-(server-start)
-
 ;;;; customize packages
 (setq csv-align-max-width 100)
 
