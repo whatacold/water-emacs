@@ -15,4 +15,8 @@
 (which-key-mode)
 
 ;;; misc
+
+;; midnight
+(require 'midnight)
+(add-hook 'midnight-hook #'recentf-save-list)
 (midnight-mode) ; (clean-buffer-list) automatically
