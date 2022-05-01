@@ -123,6 +123,7 @@
                    subed
 		   which-key
                    docker
+                   battery-notifier
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))

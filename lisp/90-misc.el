@@ -20,3 +20,5 @@
 (require 'midnight)
 (add-hook 'midnight-hook #'recentf-save-list)
 (midnight-mode) ; (clean-buffer-list) automatically
+
+(battery-notifier-mode)
