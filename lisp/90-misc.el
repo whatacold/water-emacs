@@ -15,6 +15,10 @@
 (which-key-mode)
 
 ;;; misc
+;;;; save the recent file list
+(run-with-timer 600 600
+                (lambda ()
+                  (recentf-save-list)))
 
 ;; midnight
 (require 'midnight)
