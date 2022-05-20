@@ -108,6 +108,7 @@
                    cider
                    ggtags
                    hl-todo
+                   typescript-mode
                    emmet-mode ; html
 		   php-mode
 		   csv-mode
