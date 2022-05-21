@@ -29,7 +29,7 @@
 
 (battery-notifier-mode)
 
-(defun w/screen-brightness-adjust (inc)
+(defun w/adjust-screen-brightness (inc)
   "Adjust the screen brightness by INC*10%.
 
 INC may be passed as a numeric prefix argument.
@@ -65,5 +65,5 @@ the screen brightness as long as the input event read
            (dolist (key '(?- ?+ ?=)) ;; = is often unshifted +.
              (define-key map (vector (append mods (list key)))
                (lambda () (interactive)
-                 (w/screen-brightness-adjust (abs inc))))))
+                 (w/adjust-screen-brightness (abs inc))))))
          map)))))

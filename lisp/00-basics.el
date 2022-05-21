@@ -95,12 +95,15 @@
 (defun w/duplicate-line()
   "Duplicate the current line."
   (interactive)
-  (move-beginning-of-line 1)
-  (kill-line)
-  (yank)
-  (open-line 1)
-  (next-line 1)
-  (yank))
+  (let ((line-text (buffer-substring-no-properties
+                    (line-beginning-position)
+                    (line-end-position))))
+    (save-excursion
+      (move-end-of-line 1)
+      (open-line 1)
+      (forward-char)
+      (insert line-text))
+    (next-line)))
 
 (setq recentf-max-saved-items 10000
       recentf-auto-cleanup 'never)
