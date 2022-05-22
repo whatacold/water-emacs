@@ -92,16 +92,21 @@
 (setq magit-diff-refine-hunk t)
 
 ;;; others
-(defun w/duplicate-line()
+(defun w/duplicate-line(comment-first)
   "Duplicate the current line."
-  (interactive)
+  (interactive "P")
   (let ((line-text (buffer-substring-no-properties
                     (line-beginning-position)
                     (line-end-position))))
     (save-excursion
-      (move-end-of-line 1)
-      (open-line 1)
-      (forward-char)
+      (if comment-first
+          (progn
+            (comment-line 1)
+            (move-beginning-of-line 1)
+            (open-line 1))
+        (move-end-of-line 1)
+        (open-line 1)
+        (forward-char))
       (insert line-text))
     (next-line)))
 
