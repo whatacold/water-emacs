@@ -49,3 +49,7 @@
 ;;; others
 (require 'iedit) ; will bind C-; internally
 (defalias #'cleanup-buffer #'whitespace-cleanup)
+
+(defun w/insert-lorem ()
+  (interactive)
+  (insert "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem mauris, aliquam vel interdum in, faucibus non libero. Asunt in anim uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in anim id est laborum. Allamco laboris nisi ut aliquip ex ea commodo consequat."))
