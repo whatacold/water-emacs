@@ -16,13 +16,12 @@
 (setq which-key-allow-imprecise-window-fit t) ; performance
 (which-key-mode)
 
-;;; misc
-;;;; save the recent file list
+;;; save the recent file list
 (run-with-timer 600 600
                 (lambda ()
                   (recentf-save-list)))
 
-;; midnight
+;;; midnight
 (require 'midnight)
 (add-hook 'midnight-hook #'recentf-save-list)
 (midnight-mode) ; (clean-buffer-list) automatically
@@ -50,9 +49,8 @@ the screen brightness as long as the input event read
     (let* ((base (event-basic-type ev))
            (step (* inc 10))
            (cmd (format "brightnessctl set %s%d%%%s" ; +10% or 10%-
-                        (if (or (= ?+ base)
-                                (= ?= base))
-                            "+"
+                        (if (/= ?- base)
+                            "+"         ; increase it by default
                           "")
                         step
                         (if (= ?- base) "-" ""))))
