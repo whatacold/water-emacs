@@ -26,6 +26,15 @@ If `specify-project-p' is non-nil, prompt users to select a project."
                  (project-root pr))))
     (counsel-rg "" root nil (format "Grep files in %s: " root))))
 
+;;; web-mode
+(require 'web-mode)
+(setq web-mode-markup-indent-offset 2
+      web-mode-code-indent-offset 2
+      ;; M-x web-mode-set-content-type
+      web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
+
 ;;; eglot
 (setq eldoc-echo-area-use-multiline-p nil)
 
