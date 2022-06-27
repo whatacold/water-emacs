@@ -87,7 +87,7 @@
                    delight ; for hiding specified minor modes; better that diminish
 
                    ;; jumping around
-                   avy ace-link ace-pinyin
+                   avy ivy-avy ace-link ace-pinyin
                    ace-window
 
                    ;; reading
