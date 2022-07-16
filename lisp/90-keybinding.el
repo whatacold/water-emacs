@@ -30,6 +30,7 @@
 
 ;; jumping around
 (global-set-key (kbd "C-c j c") #'avy-goto-char)
+(global-set-key (kbd "C-c j w") #'avy-goto-word-1)
 (global-set-key (kbd "C-c j o") #'ace-link)
 (global-set-key (kbd "C-c j m") #'counsel-imenu)
 (global-set-key (kbd "C-c j r") #'counsel-recentf)
@@ -50,3 +51,9 @@
 
 ;; project.el
 (define-key project-prefix-map "i" #'w/project-rg)
+
+;; ggtags
+(eval-after-load 'ggtags
+  '(progn
+     (define-key ggtags-navigation-map (kbd "M-<") nil)
+     (define-key ggtags-navigation-map (kbd "M->") nil)))

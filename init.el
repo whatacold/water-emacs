@@ -42,6 +42,7 @@
 (setq auto-save-list-file-prefix "~/.emacs.local.d/auto-save-list/.saves-")
 (setq smex-save-file "~/.emacs.local.d/.smex-items")
 (setq eshell-history-file-name "~/.emacs.local.d/eshell/history")
+(setq image-dired-dir "~/.emacs.local.d/image-dired/")
 (setq yas-snippet-dirs '(w/yasnippet-dir))
 ;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
 (setq custom-file "~/.emacs.local.d/custom-set-variables.el")
@@ -84,7 +85,7 @@
                    ;; UI
                    beacon ; for fun
                    cnfonts
-                   delight ; for hiding specified minor modes; better that diminish
+                   delight ; for hiding specified minor modes; better than diminish
 
                    ;; jumping around
                    avy ivy-avy ace-link ace-pinyin
@@ -110,6 +111,7 @@
                    hl-todo
                    typescript-mode
                    emmet-mode ; html
+                   web-mode
 		   php-mode
 		   csv-mode
 		   eglot

@@ -26,6 +26,12 @@
 (add-hook 'midnight-hook #'recentf-save-list)
 (midnight-mode) ; (clean-buffer-list) automatically
 
+;;; subed
+(setq subed-loop-seconds-before 0
+      subed-loop-seconds-after 0
+      subed-default-subtitle-length 3500)
+
+;;; OS helpers
 (battery-notifier-mode)
 
 (defun w/adjust-screen-brightness (inc)
