@@ -42,6 +42,8 @@
 (global-set-key (kbd "C-c o c") #'org-capture)
 (global-set-key (kbd "C-c o a") #'org-agenda)
 (global-set-key (kbd "C-c o l") #'org-store-link)
+(global-set-key (kbd "C-c o i") #'org-download-image)
+(global-set-key (kbd "C-c o y") #'org-download-clipboard) ; y as in C-y
 
 ;; eglot
 (eval-after-load 'eglot

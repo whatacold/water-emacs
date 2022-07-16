@@ -34,6 +34,14 @@
 
 ;;; org-mode
 (setq org-adapt-indentation nil) ; don't indent to outline node level
+(setq-default org-download-image-dir "~/org/images/"
+              org-download-heading-lvl nil)
+(setq org-download-screenshot-method (if (eq system-type 'cygwin)
+                                         "convert clipboard: %s"
+                                       "gnome-screenshot -a -f %s"))
+
+(eval-after-load 'org-mode
+  '(require org-download))
 
 (defun w/org-mode-hook-setup ()
   (org-num-mode)
