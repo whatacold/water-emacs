@@ -121,6 +121,7 @@
                    yaml-mode
 
                    ;; misc
+                   quelpa
                    expand-region
                    keycast
                    subed
@@ -135,6 +136,10 @@
       (setq refreshed-p t))
     (unless (package-installed-p pkg)
       (package-install pkg))))
+
+;;;; install packages via quelpa
+(unless (package-installed-p 'beancount)
+  (quelpa '(beancount :repo "beancount/beancount-mode" :fetcher github)))
 
 ;;; others
 (fset 'yes-or-no-p 'y-or-n-p)
