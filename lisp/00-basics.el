@@ -69,12 +69,14 @@
            (yas-minor-mode nil "yasnippet")
            (company-mode nil "company")
            (auto-revert-mode nil "autorevert")
+           (battery-notifier-mode nil "battery-notifier")
            ;; org-mode minor modes
            (org-num-mode nil "org-num")
            (valign-mode nil "valign")))
 
 ;;; dired
-(setq dired-dwim-target t)
+(setq dired-dwim-target t
+      dired-listing-switches "-alh")
 
 ;;; ivy
 (require 'ivy-avy)

@@ -21,11 +21,13 @@
 
 ;;; other established & non C-c key bindings
 (global-set-key (kbd "C-=") #'er/expand-region)
-(global-set-key (kbd "C-c C-r") #'ivy-resume)
+(global-set-key (kbd "C-c i r") #'ivy-resume)
 
 ;;; key bindings following the convention
 (global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
 (global-set-key (kbd "C-c d") #'w/duplicate-line)
+(global-set-key (kbd "C-c h") #'highlight-symbol)
+(global-set-key (kbd "C-c y") #'ivy-yasnippet)
 (global-set-key [f8] #'compile)
 
 ;; jumping around
