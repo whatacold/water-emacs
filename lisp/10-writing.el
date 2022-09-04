@@ -40,8 +40,9 @@
                                          "convert clipboard: %s"
                                        "gnome-screenshot -a -f %s"))
 
-(eval-after-load 'org-mode
-  '(require org-download))
+(eval-after-load 'org
+  '(progn
+     (require 'org-download)))
 
 (defun w/org-mode-hook-setup ()
   (org-num-mode)

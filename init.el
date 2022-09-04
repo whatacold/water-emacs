@@ -128,6 +128,7 @@
 		   which-key
                    docker
                    battery-notifier
+                   anki-editor
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))
