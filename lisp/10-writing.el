@@ -70,8 +70,32 @@
 (require 'iedit) ; will bind C-; internally
 (defalias #'cleanup-buffer #'whitespace-cleanup)
 
+;; beancount
 (add-to-list 'auto-mode-alist '("\\.beancount$" . beancount-mode))
+(setq beancount-use-ido nil)
 (add-to-list 'auto-mode-alist '("\\.bean$" . beancount-mode))
+;; beancount dirty hacks
+(defvar beancount-account-files nil
+  "List of account files")
+
+(defun w/beancount--collect-accounts-from-files (oldfun regex n)
+  (message "haha")
+  (let ((keys (funcall oldfun regex n))
+        (hash (make-hash-table :test 'equal)))
+    (dolist (key keys)
+      (puthash key nil hash))
+    ;; collect accounts from files
+    (save-excursion
+      (dolist (f beancount-account-files)
+        (with-current-buffer (find-file-noselect f)
+          (goto-char (point-min))
+          (while (re-search-forward beancount-account-regexp nil t)
+            (puthash (match-string-no-properties n) nil hash)))))
+    (hash-table-keys hash)))
+
+(advice-add #'beancount-collect
+            :around #'w/beancount--collect-accounts-from-files
+            '((name . "collect accounts from files as well")))
 
 (defun w/insert-lorem ()
   (interactive)
