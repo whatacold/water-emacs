@@ -67,6 +67,35 @@
                 scss-mode-hook))
   (add-hook hook #'yas-minor-mode))
 
+;;; smart-input-source
+(sis-ism-lazyman-config "xkb:us::eng" "rime" 'ibus)
+
+(defun w/sis--guess-context-by-prev-chars (backward-chars forward-chars)
+  "Detect the context based on the 2 chars before the point.
+
+It has a side effect of deleting the previous whitespace if
+there is a whitespace/newline and a comma before the point."
+  (when (and (>= (point) 3)
+             sis-context-mode
+             (memq major-mode '(org-mode)))
+    (let ((prev (preceding-char))
+          (pprev (char-before (1- (point)))))
+      (cond
+       ((and (or (char-equal ?  pprev) (char-equal 10 pprev)) ; a whitespace or newline
+             (char-equal ?, prev))
+        (delete-char -1)                ; side effect: delete the second whitespace
+        'other)
+       ((string-match-p "[[:ascii:]]" (char-to-string (preceding-char)))
+        'english)
+       (t 'other)))))
+
+(setq sis-context-detectors '(w/sis--guess-context-by-prev-chars))
+
+(setq sis-context-hooks '(post-command-hook)) ; may hurt performance
+
+(sis-global-respect-mode t)
+(sis-global-context-mode t)
+
 ;;; others
 (require 'iedit) ; will bind C-; internally
 (defalias #'cleanup-buffer #'whitespace-cleanup)
@@ -80,7 +109,6 @@
   "List of account files")
 
 (defun w/beancount--collect-accounts-from-files (oldfun regex n)
-  (message "haha")
   (let ((keys (funcall oldfun regex n))
         (hash (make-hash-table :test 'equal)))
     (dolist (key keys)

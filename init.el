@@ -101,6 +101,7 @@
                    valign               ; pixel-wise visual alignment of tables
 		   markdown-mode
                    wgrep
+                   sis                  ; smart input source
 
                    ;; programming
                    company-c-headers
