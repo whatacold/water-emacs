@@ -32,7 +32,10 @@
       subed-default-subtitle-length 3500)
 
 ;;; OS helpers
-(battery-notifier-mode)
+(setq visible-bell t)                   ; mute the annoying bell on Windows
+
+(when battery-status-function
+  (battery-notifier-mode))
 
 (defun w/adjust-screen-brightness (inc)
   "Adjust the screen brightness by INC*10%.

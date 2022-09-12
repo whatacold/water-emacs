@@ -89,11 +89,10 @@ there is a whitespace/newline and a comma before the point."
       (cond
        ((and (or (char-equal ?  pprev) (char-equal 10 pprev)) ; a whitespace or newline
              (char-equal ?, prev))
-        (delete-char -1)                ; side effect: delete the second whitespace
+        (delete-char -1)                ; side effect
         'other)
        ((string-match-p "[[:ascii:]]" (char-to-string (preceding-char)))
-        'english)
-       (t 'other)))))
+        'english)))))
 
 (setq sis-context-detectors '(w/sis--guess-context-by-prev-chars))
 
