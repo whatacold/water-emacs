@@ -68,7 +68,13 @@
   (add-hook hook #'yas-minor-mode))
 
 ;;; smart-input-source
-(sis-ism-lazyman-config "xkb:us::eng" "rime" 'ibus)
+(cond
+ ((string-equal system-type "windows-nt")
+  (sis-ism-lazyman-config nil t 'w32))
+ ((string-equal system-type "darwin")
+  (sis-ism-lazyman-config "com.apple.keylayout.US" "com.sogou.inputmethod.sogou.pinyin"))
+ ((string-equal system-type "gnu/linux")
+  (sis-ism-lazyman-config "xkb:us::eng" "rime" 'ibus)))
 
 (defun w/sis--guess-context-by-prev-chars (backward-chars forward-chars)
   "Detect the context based on the 2 chars before the point.
