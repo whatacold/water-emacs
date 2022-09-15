@@ -1,6 +1,15 @@
 (load "~/.emacs.local.d/init-before" 'noerror)
 
 ;;;; early settings
+;;; helpers
+(defun w/windows-p()
+  (eq system-type 'windows-nt))
+
+(defun w/linux-p()
+  (eq system-type 'gnu/linux))
+
+(defun w/macos-p()
+  (eq system-type 'darwin))
 
 ;;; http proxy
 (defcustom w/http-proxy nil
@@ -13,41 +22,41 @@
   "The font size.")
 
 (defcustom w/default-font (cond
-                           ((string-equal system-type "windows-nt") ; Microsoft Windows
+                           ((w/windows-p) ; Microsoft Windows
                             (when (member "Consolas" (font-family-list))
                               "Consolas"))
-                           ((string-equal system-type "darwin") ; macOS
+                           ((w/macos-p) ; macOS
                             (when (member "Menlo" (font-family-list))
                               "Menlo"))
-                           ((string-equal system-type "gnu/linux") ; linux
+                           ((w/linux-p) ; linux
                             (when (member "DejaVu Sans Mono" (font-family-list))
                               "DejaVu Sans Mono")))
   "The default font.")
 
 (defcustom w/chinese-font (cond
-                           ((string-equal system-type "windows-nt")
+                           ((w/windows-p)
                             (cond
                              ((member "Microsoft YaHei" (font-family-list)) "Microsoft YaHei")
                              ((member "Microsoft JhengHei" (font-family-list)) "Microsoft JhengHei")
                              ((member "SimHei" (font-family-list)) "SimHei")))
-                           ((string-equal system-type "darwin")
+                           ((w/macos-p)
                             (cond
                              ((member "Hei" (font-family-list)) "Hei")
                              ((member "Heiti SC" (font-family-list)) "Heiti SC")
                              ((member "Heiti TC" (font-family-list)) "Heiti TC")))
-                           ((string-equal system-type "gnu/linux")
+                           ((w/linux-p)
                             (cond
                              ((member "WenQuanYi Micro Hei" (font-family-list)) "WenQuanYi Micro Hei"))))
   "Chinese font.")
 
 (defcustom w/symbol-font (cond
-                          ((string-equal system-type "windows-nt")
+                          ((w/windows-p)
                            (cond
                             ((member "Segoe UI Symbol" (font-family-list)) "Segoe UI Symbol")))
-                          ((string-equal system-type "darwin")
+                          ((w/macos-p)
                            (cond
                             ((member "Apple Symbols" (font-family-list)) "Apple Symbols")))
-                          ((string-equal system-type "gnu/linux")
+                          ((w/linux-p)
                            (cond
                             ((member "Symbola" (font-family-list)) "Symbola"))))
   "Symbol font, excluding emoji.")
@@ -228,4 +237,3 @@
 
 ;;;; ending
 (load "~/.emacs.local.d/init-after" 'noerror)
-(message "have a nice day!")

@@ -69,11 +69,11 @@
 
 ;;; smart-input-source
 (cond
- ((string-equal system-type "windows-nt")
+ ((w/windows-p)
   (sis-ism-lazyman-config nil t 'w32))
- ((string-equal system-type "darwin")
+ ((w/macos-p)
   (sis-ism-lazyman-config "com.apple.keylayout.US" "com.sogou.inputmethod.sogou.pinyin"))
- ((string-equal system-type "gnu/linux")
+ ((w/linux-p)
   (sis-ism-lazyman-config "xkb:us::eng" "rime" 'ibus)))
 
 (defun w/sis--guess-context-by-prev-chars (backward-chars forward-chars)

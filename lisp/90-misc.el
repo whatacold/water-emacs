@@ -34,6 +34,7 @@
 ;;; OS helpers
 (setq visible-bell t)                   ; mute the annoying bell on Windows
 
+(require 'battery)
 (when battery-status-function
   (battery-notifier-mode))
 

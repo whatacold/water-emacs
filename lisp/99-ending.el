@@ -1,4 +1,4 @@
 ;;;; things should be at the end
 
-(when (eq 'gnu/linux system-type)
+(when (w/linux-p)
   (server-start))
