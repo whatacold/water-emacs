@@ -92,7 +92,8 @@ there is a whitespace/newline and a comma before the point."
         (delete-char -1)                ; side effect
         'other)
        ((string-match-p "[[:ascii:]]" (char-to-string (preceding-char)))
-        'english)))))
+        'english)
+       (t 'other)))))
 
 (setq sis-context-detectors '(w/sis--guess-context-by-prev-chars))
 
