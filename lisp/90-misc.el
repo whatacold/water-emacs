@@ -32,7 +32,8 @@
       subed-default-subtitle-length 3500)
 
 ;;; OS helpers
-(setq visible-bell t)                   ; mute the annoying bell on Windows
+(when (w/windows-p)
+  (setq visible-bell t))           ; mute the annoying bell
 
 (require 'battery)
 (when battery-status-function
