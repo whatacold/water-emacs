@@ -117,7 +117,11 @@
 (load-theme w/theme 'no-confirm)
 ;; font & font size
 ;; http://xahlee.info/emacs/emacs/emacs_list_and_set_font.html
-(set-frame-font (format "%s-%s" w/default-font w/font-size) t t)
+(defun w/set-default-font-size (font-size)
+  (interactive "nFont size: ")
+  (set-frame-font (format "%s-%s" w/default-font font-size) t t))
+
+(w/set-default-font-size w/font-size)
 (set-fontset-font t 'symbol w/symbol-font)
 (set-fontset-font t
                   ;; set font for emoji
