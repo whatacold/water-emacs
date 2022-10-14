@@ -54,6 +54,58 @@
 
 ;; (add-hook 'org-mode-hook #'valign-mode)
 
+;;; hugo blogging
+(defun w/hugo-complete-tags ()
+  "Auto-complete tags from the hugo org files in the current dir.
+
+Note that it only extract tags from lines like the below:
+#+tags[]: Emacs Org-mode"
+  (interactive)
+  (let ((files (directory-files-recursively default-directory "\\.org$")))
+    (let ((source (with-temp-buffer
+		    (while files
+		      (insert-file-contents (car files))
+		      (pop files))
+		    (buffer-string))))
+      (save-match-data
+	(let ((pos 0)
+	      matches)
+	  (while (string-match "^#\\+[Tt]ags\\[\\]: \\(.+?\\)$" source pos)
+	    (push (match-string 1 source) matches)
+	    (setq pos (match-end 0)))
+	  (insert
+	   (completing-read
+            "Insert a tag: "
+            (sort
+	     (delete-dups
+	      (delete "" (split-string
+			  (replace-regexp-in-string "[\"\']" " "
+						    (replace-regexp-in-string
+						     "[,()]" ""
+						     (format "%s" matches)))
+			  " ")))
+             (lambda (a b)
+               (string< (downcase a) (downcase b)))))))))))
+
+(defun w/hugo-update-lastmod ()
+  "Update the `lastmod' value for a hugo org-mode buffer."
+  (interactive)
+  (ignore-errors
+    (when (eq major-mode 'org-mode)
+      (save-excursion
+        (goto-char (point-min))
+        (search-forward-regexp "^#\\+lastmod: ")
+        (kill-line)
+        (insert (w/hugo-current-time))))))
+
+(defun w/hugo-current-time ()
+  "Get timestamp for hugo."
+  (let ((tz (format-time-string "%z")))
+    (insert (format-time-string "%Y-%m-%dT%T")
+            (substring tz 0 3) ":" (substring tz 3 5))))
+
+(add-hook 'before-save-hook #'w/hugo-update-lastmod)
+
 ;;; yasnippet
 (eval-after-load 'yasnippet
   '(yas-global-mode))
