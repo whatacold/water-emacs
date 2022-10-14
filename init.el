@@ -83,6 +83,14 @@
   (setq url-proxy-services `(("http" . ,w/http-proxy)
                              ("https" . ,w/http-proxy))))
 
+(defun w/toggle-proxy ()
+  (interactive)
+  (when w/http-proxy
+    (setq url-proxy-services (if url-proxy-services
+                                 nil
+                               `(("http" . ,w/http-proxy)
+                                 ("https" . ,w/http-proxy))))))
+
 ;;;; tweak default settings
 
 ;;; separate session files
