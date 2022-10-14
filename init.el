@@ -177,6 +177,8 @@
                    ;; writing
                    easy-hugo
                    org-download
+                   htmlize
+                   ;; org-contrib
                    valign               ; pixel-wise visual alignment of tables
 		   markdown-mode
                    wgrep

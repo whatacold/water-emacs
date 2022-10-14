@@ -45,7 +45,7 @@
      (require 'org-download)))
 
 (defun w/org-mode-hook-setup ()
-  (org-num-mode)
+  ;; (org-num-mode)
 
   (setq truncate-lines nil) ; display wrapped lines instead of truncated lines
   ;; (setq word-wrap t)
@@ -82,8 +82,7 @@
 It has a side effect of deleting the previous whitespace if
 there is a whitespace/newline and a comma before the point."
   (when (and (>= (point) 3)
-             sis-context-mode
-             (memq major-mode '(org-mode)))
+             sis-context-mode)
     (let ((prev (preceding-char))
           (pprev (char-before (1- (point)))))
       (cond
