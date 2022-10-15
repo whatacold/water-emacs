@@ -55,16 +55,17 @@
 ;; (add-hook 'org-mode-hook #'valign-mode)
 
 ;;; hugo blogging
-(defun w/hugo-complete-tags ()
-  "Auto-complete tags from the hugo org files in the current dir.
+(defun w/hugo--collect-tags ()
+  "Collect hugo tags from the org files in the current dir.
 
-Note that it only extract tags from lines like the below:
+Note that it only extracts tags from lines like the below:
 #+tags[]: Emacs Org-mode"
   (interactive)
   (let ((files (directory-files-recursively default-directory "\\.org$")))
     (let ((source (with-temp-buffer
 		    (while files
-		      (insert-file-contents (car files))
+                      (when (file-exists-p (car files))
+                        (insert-file-contents (car files)))
 		      (pop files))
 		    (buffer-string))))
       (save-match-data
@@ -73,19 +74,28 @@ Note that it only extract tags from lines like the below:
 	  (while (string-match "^#\\+[Tt]ags\\[\\]: \\(.+?\\)$" source pos)
 	    (push (match-string 1 source) matches)
 	    (setq pos (match-end 0)))
-	  (insert
-	   (completing-read
-            "Insert a tag: "
-            (sort
-	     (delete-dups
-	      (delete "" (split-string
-			  (replace-regexp-in-string "[\"\']" " "
-						    (replace-regexp-in-string
-						     "[,()]" ""
-						     (format "%s" matches)))
-			  " ")))
-             (lambda (a b)
-               (string< (downcase a) (downcase b)))))))))))
+          (sort
+	   (delete-dups
+	    (delete "" (split-string
+			(replace-regexp-in-string "[\"\']" " "
+						  (replace-regexp-in-string
+						   "[,()]" ""
+						   (format "%s" matches)))
+			" ")))
+           (lambda (a b)
+             (string< (downcase a) (downcase b)))))))))
+
+(defun w/hugo-select-tags ()
+  "Select tags for the current hugo post."
+  (interactive)
+  (ivy-read "Insert tags: "
+            (w/hugo--collect-tags)
+            :action
+            (lambda (tag)
+              (insert (if (char-equal (preceding-char) 32)
+                          ""
+                        " ")
+                      tag))))
 
 (defun w/hugo-update-lastmod ()
   "Update the `lastmod' value for a hugo org-mode buffer."
@@ -95,7 +105,7 @@ Note that it only extract tags from lines like the below:
       (save-excursion
         (goto-char (point-min))
         (search-forward-regexp "^#\\+lastmod: ")
-        (kill-line)
+        (delete-region (point) (line-end-position))
         (insert (w/hugo-current-time))))))
 
 (defun w/hugo-current-time ()
