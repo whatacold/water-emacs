@@ -16,8 +16,9 @@
 ;; searching
 ;; workaround to distinguish `C-i' from 'TAB'
 ;; https://stackoverflow.com/a/11319885/910978
-(define-key input-decode-map (kbd "C-i") (kbd "H-i")) ; C-i == TAB by default
-(global-set-key (kbd "H-i") #'counsel-rg)
+;; (define-key input-decode-map (kbd "C-i") (kbd "H-i")) ; C-i == TAB by default
+;; (global-set-key (kbd "H-i") #'counsel-rg)
+(global-set-key (kbd "C-c u u") #'counsel-rg)
 
 ;;; other established & non C-c key bindings
 (global-set-key (kbd "C-=") #'er/expand-region)
