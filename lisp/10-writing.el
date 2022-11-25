@@ -15,7 +15,7 @@
        (setq company-ispell-dictionary (file-truename w/company-ispell-dict))
        (add-to-list 'company-backends #'company-ispell))
 
-     (setq company-show-numbers t ; press M-number to choose candidate
+     (setq company-show-numbers t ; so that we can press M-number to choose a candidate
            company-idle-delay 0.2
            company-require-match nil)))
 
@@ -33,7 +33,8 @@
     try-complete-lisp-symbol))
 
 ;;; org-mode
-(setq org-adapt-indentation nil) ; don't indent to outline node level
+(setq org-adapt-indentation nil ; don't indent to outline node level
+      org-edit-src-content-indentation 0)
 (setq-default org-download-image-dir "~/org/images/"
               org-download-heading-lvl nil)
 (setq org-download-screenshot-method (if (eq system-type 'cygwin)
@@ -130,13 +131,14 @@ Note that it only extracts tags from lines like the below:
   (add-hook hook #'yas-minor-mode))
 
 ;;; smart-input-source
-(cond
- ((w/windows-p)
-  (sis-ism-lazyman-config nil t 'w32))
- ((w/macos-p)
-  (sis-ism-lazyman-config "com.apple.keylayout.US" "com.sogou.inputmethod.sogou.pinyin"))
- ((w/linux-p)
-  (sis-ism-lazyman-config "xkb:us::eng" "rime" 'ibus)))
+(when (w/gui-p)
+  (cond
+   ((w/windows-p)
+    (sis-ism-lazyman-config nil t 'w32))
+   ((w/macos-p)
+    (sis-ism-lazyman-config "com.apple.keylayout.US" "com.sogou.inputmethod.sogou.pinyin"))
+   ((w/linux-p)
+    (sis-ism-lazyman-config "xkb:us::eng" "rime" 'ibus))))
 
 (defun w/sis--guess-context-by-prev-chars (backward-chars forward-chars)
   "Detect the context based on the 2 chars before the point.
@@ -160,8 +162,9 @@ there is a whitespace/newline and a comma before the point."
 
 (setq sis-context-hooks '(post-command-hook)) ; may hurt performance
 
-(sis-global-respect-mode t)
-(sis-global-context-mode t)
+(when (w/gui-p)
+  (sis-global-respect-mode t)
+  (sis-global-context-mode t))
 
 ;;; others
 (require 'iedit) ; will bind C-; internally

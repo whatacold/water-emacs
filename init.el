@@ -2,6 +2,11 @@
 
 ;;;; early settings
 ;;; helpers
+(defun w/terminal-p ()
+  (not (display-graphic-p)))
+
+(defalias 'w/gui-p #'display-graphic-p)
+
 (defun w/windows-p()
   (eq system-type 'windows-nt))
 
@@ -122,28 +127,34 @@
   (set-frame-font (format "%s-%s" w/default-font font-size) t t))
 
 (w/set-default-font-size w/font-size)
-(set-fontset-font t 'symbol w/symbol-font)
-(set-fontset-font t
-                  ;; set font for emoji
-                  ;; (if before emacs 28, should come after setting symbols.
-                  ;; emacs 28 now has 'emoji . before, emoji is part of 'symbol)
-                  (if (version< emacs-version "28.1")
-                      '(#x1f300 . #x1fad0)
-                    'emoji)
-                  w/emoji-font)
-(set-fontset-font t 'han w/chinese-font)
+
+(when (w/gui-p)
+  (set-fontset-font t 'symbol w/symbol-font)
+  (set-fontset-font t
+                    ;; set font for emoji
+                    ;; (if before emacs 28, should come after setting symbols.
+                    ;; emacs 28 now has 'emoji . before, emoji is part of 'symbol)
+                    (if (version< emacs-version "28.1")
+                        '(#x1f300 . #x1fad0)
+                      'emoji)
+                    w/emoji-font)
+  (set-fontset-font t 'han w/chinese-font))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
+(when (w/gui-p)
+  (scroll-bar-mode -1))
+
+(defcustom w/package-archives '(
+                                ("gnu" . "https://elpa.gnu.org/packages/")
+                                ("melpa" . "https://melpa.org/packages/")
+                                ("melpa-stable" . "http://stable.melpa.org/packages/")
+                                ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                                ;; ("org" . "https://orgmode.org/elpa/")
+                                ))
 
 ;;; packages
-(setq package-archives '(
-                         ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stable" . "http://stable.melpa.org/packages/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                         ))
+(setq package-archives w/package-archives)
 (require 'package)
 (package-initialize)
 

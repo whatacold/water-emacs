@@ -18,11 +18,11 @@
 ;; https://stackoverflow.com/a/11319885/910978
 ;; (define-key input-decode-map (kbd "C-i") (kbd "H-i")) ; C-i == TAB by default
 ;; (global-set-key (kbd "H-i") #'counsel-rg)
-(global-set-key (kbd "C-c u u") #'counsel-rg)
 
 ;;; other established & non C-c key bindings
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C-c i r") #'ivy-resume)
+(global-set-key (kbd "C-c i i") #'counsel-rg)
 
 ;;; key bindings following the convention
 (global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
@@ -33,7 +33,7 @@
 
 ;; jumping around
 (global-set-key (kbd "C-c j c") #'avy-goto-char)
-(global-set-key (kbd "C-c j w") #'avy-goto-word-1)
+(global-set-key (kbd "C-c j j") #'avy-goto-word-1)
 (global-set-key (kbd "C-c j o") #'ace-link)
 (global-set-key (kbd "C-c j m") #'counsel-imenu)
 (global-set-key (kbd "C-c j r") #'counsel-recentf)
