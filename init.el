@@ -140,9 +140,9 @@
                     w/emoji-font)
   (set-fontset-font t 'han w/chinese-font))
 
-(tool-bar-mode -1)
 (menu-bar-mode -1)
 (when (w/gui-p)
+  (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
 (defcustom w/package-archives '(
@@ -151,7 +151,8 @@
                                 ("melpa-stable" . "http://stable.melpa.org/packages/")
                                 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                                 ;; ("org" . "https://orgmode.org/elpa/")
-                                ))
+                                )
+  "default package archives.")
 
 ;;; packages
 (setq package-archives w/package-archives)
