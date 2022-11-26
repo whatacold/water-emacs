@@ -201,7 +201,7 @@
                    paredit
                    tiny
                    cider
-                   counsel-etags
+                   gtags-mode
                    hl-todo
                    typescript-mode
                    emmet-mode ; html
