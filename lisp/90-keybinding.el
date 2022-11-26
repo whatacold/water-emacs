@@ -56,9 +56,3 @@
 
 ;; project.el
 (define-key project-prefix-map "i" #'w/project-rg)
-
-;; ggtags
-(eval-after-load 'ggtags
-  '(progn
-     (define-key ggtags-navigation-map (kbd "M-<") nil)
-     (define-key ggtags-navigation-map (kbd "M->") nil)))
