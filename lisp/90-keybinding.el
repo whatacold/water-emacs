@@ -1,3 +1,12 @@
+(defhydra hydra-subed-shadowing (global-map "<f5>")
+  "Shadowing in subed"
+  ("SPC" subed-mpv-toggle-pause "play/pause")
+  ("l" subed-toggle-loop-over-current-subtitle "loop or not")
+  ("n" subed-forward-subtitle-text "next")
+  ("p" subed-backward-subtitle-text "prev"))
+
+(setq gtags-mode-lighter nil)
+
 ;;;; key bindings
 ;;; built-in feature enhancements
 (global-set-key (kbd "C-h f") #'counsel-describe-function)
