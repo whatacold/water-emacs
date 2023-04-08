@@ -34,6 +34,7 @@
 
 ;;; org-mode
 (setq org-adapt-indentation nil ; don't indent to outline node level
+      org-blank-before-new-entry nil    ; https://emacs.stackexchange.com/questions/14629/org-mode-level-line-spacing
       org-edit-src-content-indentation 0)
 (setq-default org-download-image-dir "~/org/images/"
               org-download-heading-lvl nil)
@@ -47,7 +48,7 @@
 
 (defun w/org-mode-hook-setup ()
   ;; (org-num-mode)
-
+  (setq line-spacing 0.2)               ; https://wilkesley.org/~ian/xah/emacs/emacs_toggle_line_spacing.html
   (setq truncate-lines nil) ; display wrapped lines instead of truncated lines
   ;; (setq word-wrap t)
   )
