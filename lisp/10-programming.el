@@ -98,8 +98,8 @@ If `specify-project-p' is non-nil, prompt users to select a project."
     (start-process urxvt nil urxvt "-cd" (expand-file-name "./"))))
 
 (defun w/join-lines (specify-separator)
-  "Join lines by a separator, which by default is a comma.
-Specify the separator by typing C-u first.
+  "Join lines in the active region by a separator, by default a comma.
+Specify the separator by typing C-u before executing this command.
 
 Note: it depends on s.el."
   (interactive "P")
@@ -108,7 +108,7 @@ Note: it depends on s.el."
     (message "select a region of lines first."))
   (let* ((separator (if (not specify-separator)
                         ","
-                      (read-string "separator: ")))
+                      (read-string "Separator: ")))
          (text (buffer-substring-no-properties
                (region-beginning)
                (region-end)))

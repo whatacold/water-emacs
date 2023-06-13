@@ -172,6 +172,7 @@
                    magit
                    quelpa
                    easy-kill
+                   hydra
 
                    ;; UI
                    beacon ; for fun
@@ -185,6 +186,7 @@
                    ;; reading
                    elfeed elfeed-org
                    highlight-symbol
+                   outline-toc          ; for markdown, org, and outline modes
 
                    ;; writing
                    easy-hugo
@@ -194,6 +196,7 @@
                    valign               ; pixel-wise visual alignment of tables
 		   markdown-mode
                    wgrep
+                   auctex
                    sis                  ; smart input source
 
                    ;; programming
