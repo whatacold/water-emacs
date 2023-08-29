@@ -54,6 +54,14 @@
   )
 (add-hook 'org-mode-hook #'w/org-mode-hook-setup)
 
+(defun w/org-anki-sync ()
+  "Sync anki to the web."
+  (org-anki-connect-request '(("action" . "sync"))
+                            (lambda (result) (message "org anki sync succ"))
+                            nil))
+
+(run-with-idle-timer 120 'repeat #'w/org-anki-sync)
+
 ;; (add-hook 'org-mode-hook #'valign-mode)
 
 ;;; hugo blogging
