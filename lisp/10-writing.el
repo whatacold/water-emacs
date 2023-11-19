@@ -72,6 +72,24 @@
           (emphasis-char "*"))
       (delete-region (region-beginning) (region-end))
       (insert emphasis-char origin emphasis-char))))
+(defun w/org-anki-sync-subentries ()
+  "Sync all subentries of the current entry at point.
+
+Also respect `org-anki-skip-function'."
+  (interactive)
+  (save-excursion
+    (let* ((next-level (1+ (org-current-level)))
+           (notes (org-map-entries (lambda ()
+                          (when (and t
+                                     (= next-level (org-element-property :level (org-element-at-point))))
+                            (org-anki--note-at-point)
+                            ))
+                        nil
+                        'tree
+                        org-anki-skip-function)))
+      (org-anki--sync-notes (seq-filter (lambda (note) note)
+                                        notes)))))
+
 (defun w/org-anki-sync ()
   "Sync anki to the web."
   (interactive)
@@ -79,7 +97,6 @@
                             (lambda (result) (message "org anki sync succ"))
                             nil))
 
-(run-with-idle-timer 120 'repeat #'w/org-anki-sync)
 
 ;; (add-hook 'org-mode-hook #'valign-mode)
 
