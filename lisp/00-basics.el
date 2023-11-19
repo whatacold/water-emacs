@@ -68,7 +68,7 @@
            (which-key-mode nil "which-key")
            (yas-minor-mode nil "yasnippet")
            (company-mode nil "company")
-           (auto-revert-mode nil "autorevert")
+           ;; (auto-revert-mode nil "autorevert")
            (battery-notifier-mode nil "battery-notifier")
            ;; org-mode minor modes
            (org-num-mode nil "org-num")

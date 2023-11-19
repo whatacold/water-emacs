@@ -54,6 +54,9 @@
   )
 (add-hook 'org-mode-hook #'w/org-mode-hook-setup)
 
+(setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
+      org-reveal-theme "white")
+
 (defun w/org-anki-sync ()
   "Sync anki to the web."
   (org-anki-connect-request '(("action" . "sync"))
