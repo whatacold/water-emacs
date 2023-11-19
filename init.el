@@ -191,6 +191,7 @@
                    ;; writing
                    easy-hugo
                    org-download
+                   ox-reveal
                    htmlize
                    ;; org-contrib
                    valign               ; pixel-wise visual alignment of tables
