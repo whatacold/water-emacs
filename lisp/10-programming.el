@@ -34,6 +34,9 @@ If `specify-project-p' is non-nil, prompt users to select a project."
       web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
+;; wechatapp project files
+(add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
 
 ;;; eglot
 (setq eldoc-echo-area-use-multiline-p nil)
