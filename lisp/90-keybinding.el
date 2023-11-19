@@ -5,6 +5,13 @@
   ("n" subed-forward-subtitle-text "next")
   ("p" subed-backward-subtitle-text "prev"))
 
+(winner-mode)
+
+(defhydra hydra (global-map "C-c w")
+  "Navigate the time machine of the window layout"
+  ("p" winner-undo "Previous layout")
+  ("n" winner-redo "Next layout"))
+
 (setq gtags-mode-lighter nil)
 
 ;;;; key bindings
