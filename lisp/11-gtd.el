@@ -11,4 +11,5 @@
 ;; org-mobile for MobileOrg
 (setq org-mobile-files '("~/org/mobileorg.org" ; the capture file whose name cannot be customized
                          org-agenda-files) ; files to be staged, should be in absolute path
+      org-mobile-inbox-for-pull "~/org/mobileorg-from-mobile.org"
       org-mobile-directory "~/mobileorg/") ; the staging area

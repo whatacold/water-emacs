@@ -35,7 +35,13 @@
 ;;; org-mode
 (setq org-adapt-indentation nil ; don't indent to outline node level
       org-blank-before-new-entry nil    ; https://emacs.stackexchange.com/questions/14629/org-mode-level-line-spacing
+      org-startup-folded t
       org-edit-src-content-indentation 0)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (C . t)
+   (emacs-lisp . t)))
 (setq-default org-download-image-dir "~/org/images/"
               org-download-heading-lvl nil)
 (setq org-download-screenshot-method (if (eq system-type 'cygwin)
@@ -44,6 +50,7 @@
 
 (eval-after-load 'org
   '(progn
+     (require 'ol-man)                  ; link manpages from org
      (require 'org-download)))
 
 (defun w/org-mode-hook-setup ()
@@ -59,6 +66,7 @@
 
 (defun w/org-anki-sync ()
   "Sync anki to the web."
+  (interactive)
   (org-anki-connect-request '(("action" . "sync"))
                             (lambda (result) (message "org anki sync succ"))
                             nil))
