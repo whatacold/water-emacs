@@ -35,15 +35,19 @@
 ;; (define-key input-decode-map (kbd "C-i") (kbd "H-i")) ; C-i == TAB by default
 ;; (global-set-key (kbd "H-i") #'counsel-rg)
 
-;;; other established & non C-c key bindings
+;;; other established & non C-c key bindings,
+;;; explore global-map to find some inspirations
 (global-set-key (kbd "C-=") #'er/expand-region)
+(global-set-key (kbd "C-\\") #'counsel-rg)
+(global-set-key (kbd "C-z") #'set-mark-command) ; for MS-Windows
+
 (global-set-key (kbd "C-c i r") #'ivy-resume)
-(global-set-key (kbd "C-c i i") #'counsel-rg)
+;; (global-set-key (kbd "C-c i i") #'counsel-rg)
 
 ;;; key bindings following the convention
 (global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
 (global-set-key (kbd "C-c d") #'w/duplicate-line)
-(global-set-key (kbd "C-c h") #'highlight-symbol)
+(global-set-key (kbd "C-c h") #'symbol-overlay-put)
 (global-set-key (kbd "C-c y") #'ivy-yasnippet)
 (global-set-key [f8] #'compile)
 
