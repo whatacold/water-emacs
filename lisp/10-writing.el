@@ -64,6 +64,14 @@
 (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
       org-reveal-theme "white")
 
+;;; Emphasize content by dragging the mouse
+(define-advice mouse-set-region (:after (click) org-highlight ())
+  (when (and (derived-mode-p 'org-mode)
+             (use-region-p))
+    (let ((origin (buffer-substring (region-beginning) (region-end)))
+          (emphasis-char "*"))
+      (delete-region (region-beginning) (region-end))
+      (insert emphasis-char origin emphasis-char))))
 (defun w/org-anki-sync ()
   "Sync anki to the web."
   (interactive)
