@@ -200,8 +200,10 @@ there is a whitespace/newline and a comma before the point."
 
 ;; beancount
 (add-to-list 'auto-mode-alist '("\\.beancount$" . beancount-mode))
-(setq beancount-use-ido nil)
+(setq beancount-use-ido nil
+      beancount-mode-map-prefix [(control c) (b)])
 (add-to-list 'auto-mode-alist '("\\.bean$" . beancount-mode))
+(add-hook 'beancount-mode-hook #'outline-minor-mode)
 ;; beancount dirty hacks
 (defvar beancount-account-files nil
   "List of account files")
