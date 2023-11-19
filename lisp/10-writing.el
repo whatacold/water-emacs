@@ -186,13 +186,13 @@ there is a whitespace/newline and a comma before the point."
         'english)
        (t 'other)))))
 
-(setq sis-context-detectors '(w/sis--guess-context-by-prev-chars))
+;; FIXME make respect mode for C-x b not work
+;; (setq sis-context-detectors '(w/sis--guess-context-by-prev-chars))
+;; (setq sis-context-hooks '(post-command-hook)) ; may hurt performance
 
-(setq sis-context-hooks '(post-command-hook)) ; may hurt performance
-
-(when (w/gui-p)
-  (sis-global-respect-mode t)
-  (sis-global-context-mode t))
+;; (when (w/gui-p)
+;;   (sis-global-respect-mode t)
+;;   (sis-global-context-mode t))
 
 ;;; others
 (require 'iedit) ; will bind C-; internally
