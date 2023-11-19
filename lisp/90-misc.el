@@ -1,4 +1,6 @@
 ;; -*- lexical-binding: t -*-
+;;; tune built-in features
+(setq messages-buffer-max-lines 10000)
 
 ;;; keycast
 (setq keycast-log-format "%-18K%C%R\n"
@@ -11,7 +13,6 @@
   '(progn
      (push '(self-insert-command nil nil) keycast-substitute-alist)))
 
-
 ;;; which-key displays the key bindings following your currently entered incomplete command (a prefix) in a popup
 (setq which-key-allow-imprecise-window-fit t) ; performance
 (which-key-mode)
@@ -21,9 +22,16 @@
                 (lambda ()
                   (recentf-save-list)))
 
+(defun w/do-things-when-idle ()
+  (w/org-anki-sync)
+  (org-mobile-push))
+
+(run-with-idle-timer 1800 'repeat #'w/do-things-when-idle)
+
 ;;; midnight
 (require 'midnight)
 (add-hook 'midnight-hook #'recentf-save-list)
+(add-hook 'midnight-hook #'w/do-things-when-idle)
 (midnight-mode) ; (clean-buffer-list) automatically
 
 ;;; subed
