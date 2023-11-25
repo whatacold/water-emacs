@@ -188,6 +188,7 @@
                    elfeed elfeed-org
                    highlight-symbol
                    outline-toc          ; for markdown, org, and outline modes
+                   org-present
 
                    ;; writing
                    easy-hugo
@@ -199,7 +200,7 @@
 		   markdown-mode
                    wgrep
                    auctex
-                   sis                  ; smart input source
+                   ;; sis                  ; smart input source
 
                    ;; programming
                    company-c-headers
@@ -227,7 +228,7 @@
 		   which-key
                    docker
                    battery-notifier
-                   anki-editor
+                   org-anki
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))

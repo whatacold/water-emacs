@@ -1,6 +1,8 @@
 ;;; basics
 (require 's) ; for e.g. writing query-replace-regexp expressions
 
+(display-fill-column-indicator-mode)    ; C-x f to set the fill-column
+
 ;;; project
 (defun w/project-try-local (dir)
   "Determine if DIR is a non-Git project."
