@@ -15,6 +15,7 @@
 (setq gtags-mode-lighter nil)
 
 ;;;; key bindings
+
 ;;; built-in feature enhancements
 (global-set-key (kbd "C-h f") #'counsel-describe-function)
 (global-set-key (kbd "C-h v") #'counsel-describe-variable)
@@ -27,6 +28,9 @@
 (global-set-key (kbd "M-g g") #'avy-goto-line) ; goto-line
 (global-set-key (kbd "M-x") #'counsel-M-x) ; execute-extended-command
 (global-set-key (kbd "M-y") #'counsel-yank-pop) ; yank-pop
+
+;;; extend built-in keybindings
+(global-set-key (kbd "C-x 8 h") #'w/insert-xhs-emoji) ; C-x 8 x doesn't work, why?
 
 ;;; unusual key bindings
 ;; searching
@@ -66,7 +70,7 @@
 (global-set-key (kbd "C-c o a") #'org-agenda)
 (global-set-key (kbd "C-c o l") #'org-store-link)
 (global-set-key (kbd "C-c o i") #'org-download-image)
-(global-set-key (kbd "C-c o y") #'org-download-clipboard) ; y as in C-y
+(global-set-key (kbd "C-c o y") #'org-download-clipboard) ; y as in yank/C-y
 
 ;; eglot
 (eval-after-load 'eglot

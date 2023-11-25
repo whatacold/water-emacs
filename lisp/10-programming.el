@@ -1,7 +1,10 @@
 ;;; basics
 (require 's) ; for e.g. writing query-replace-regexp expressions
 
-(display-fill-column-indicator-mode)    ; C-x f to set the fill-column
+;;; programming modes
+(add-hook 'prog-mode-hook (lambda ()
+                            ;; C-x f to set the fill-column
+                            (display-fill-column-indicator-mode)))
 
 ;;; project
 (defun w/project-try-local (dir)
