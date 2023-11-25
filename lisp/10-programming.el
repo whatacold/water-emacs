@@ -103,7 +103,7 @@ If `specify-project-p' is non-nil, prompt users to select a project."
 (defvar w/join-lines--last-separator ","
   "Keep the last used separator for `w/join-lines', a comma by default.")
 
-(defun w/join-lines (specify-separator)
+(defun w/join-lines (&optional specify-separator)
   "Join lines in the active region by a separator, by default the last used.
 Specify the separator by typing C-u before executing this command.
 
@@ -120,6 +120,41 @@ Note: it depends on s.el."
                (region-end)))
          (lines (split-string text "\n"))
          (result (s-join separator lines)))
+    (delete-region (region-beginning) (region-end))
+    (insert result)
+    (setq w/join-lines--last-separator separator)))
+
+(defun w/join-every-n-lines (&optional specify-separator)
+  "Join every N lines in the active region by a separator,
+by default the last used.
+
+Specify the separator by typing C-u before executing this
+command.
+
+Note: it depends on s.el."
+  (interactive "P")
+  (require 's)
+  (unless (region-active-p)
+    (error "select a region of all-lines first."))
+  (let* ((n (string-to-number (read-string "N =: ")))
+         (separator (if (not specify-separator)
+                        w/join-lines--last-separator
+                      (read-string "Separator: ")))
+         (text (buffer-substring-no-properties
+               (region-beginning)
+               (region-end)))
+         (all-lines (split-string text "\n"))
+         n-lines
+         result)
+    (while all-lines
+      (let (lines line)
+        (dotimes (_ n)
+          (when (setq line (pop all-lines))
+            (push line lines)))
+        (push (reverse lines) n-lines)))
+    (setq result (mapconcat (lambda (lines)
+                              (s-join separator lines))
+                            (reverse n-lines) "\n"))
     (delete-region (region-beginning) (region-end))
     (insert result)
     (setq w/join-lines--last-separator separator)))
