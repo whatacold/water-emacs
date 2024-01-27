@@ -1,6 +1,9 @@
-;;; company
+;;; company for completion
 (setq company-dabbrev-downcase nil
       company-dabbrev-ignore-case nil ; keep candidates as-is
+      company-show-numbers t ; so that we can press M-number to choose a candidate
+      company-idle-delay 0.2
+      company-require-match nil
       company-minimum-prefix-length 2) ; e.g. 'fo' triggers company to start completion
 
 (add-hook 'after-init-hook 'global-company-mode)
@@ -9,15 +12,11 @@
   '(progn
      (company-statistics-mode) ; suggest candidates by stats
 
-     (add-to-list 'company-backends #'company-c-headers)
+     (add-to-list 'company-backends #'company-c-headers 'append)
 
      (when w/company-ispell-dict
        (setq company-ispell-dictionary (file-truename w/company-ispell-dict))
-       (add-to-list 'company-backends #'company-ispell))
-
-     (setq company-show-numbers t ; so that we can press M-number to choose a candidate
-           company-idle-delay 0.2
-           company-require-match nil)))
+       (add-to-list 'company-backends #'company-ispell 'append))))
 
 ;;; hippie-expand
 (setq hippie-expand-try-functions-list

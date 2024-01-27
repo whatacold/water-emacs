@@ -3,20 +3,24 @@
 
 ;;; programming modes
 (add-hook 'prog-mode-hook (lambda ()
+                            ;; set company backends
+                            (setq-local company-backends '(company-capf ; including gtags by gtags-mode
+                                                           company-files
+                                                           (company-dabbrev-code company-keywords)))
                             ;; C-x f to set the fill-column
                             (display-fill-column-indicator-mode)))
 
 ;;; project
 (defun w/project-try-local (dir)
   "Determine if DIR is a non-Git project."
-  (catch 'ret
+  (catch 'break
     (let ((pr-flags '((".emacs-project" ".git")
                       ("go.mod" "Cargo.toml" "project.clj" "pom.xml" "package.json") ;; higher priority
                       )))
       (dolist (current-level pr-flags)
         (dolist (f current-level)
           (when-let ((root (locate-dominating-file dir f)))
-            (throw 'ret (cons 'transient root))))))))
+            (throw 'break (cons 'transient root))))))))
 
 (setq project-find-functions '(w/project-try-local project-try-vc))
 
