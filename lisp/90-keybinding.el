@@ -12,6 +12,15 @@
   ("p" winner-undo "Previous layout")
   ("n" winner-redo "Next layout"))
 
+(defvar winner-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "<left>") 'winner-undo)
+    (define-key map (kbd "<right>") 'winner-redo)
+    map)
+  "Keymap to repeat `winner' key sequences.  Used in `repeat-mode'.")
+(put 'winner-undo 'repeat-map 'winner-repeat-map)
+(put 'winner-redo 'repeat-map 'winner-repeat-map)
+
 (setq gtags-mode-lighter nil)
 
 ;;;; key bindings

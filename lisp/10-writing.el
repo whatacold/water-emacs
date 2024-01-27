@@ -36,6 +36,7 @@
 (setq org-adapt-indentation nil ; don't indent to outline node level
       org-blank-before-new-entry nil    ; https://emacs.stackexchange.com/questions/14629/org-mode-level-line-spacing
       org-startup-folded t
+      org-src-window-setup 'current-window ; use the current window to edit the src block
       org-edit-src-content-indentation 0)
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -64,14 +65,14 @@
 (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
       org-reveal-theme "white")
 
-;;; Emphasize content by dragging the mouse
-(define-advice mouse-set-region (:after (click) org-highlight ())
-  (when (and (derived-mode-p 'org-mode)
-             (use-region-p))
-    (let ((origin (buffer-substring (region-beginning) (region-end)))
-          (emphasis-char "*"))
-      (delete-region (region-beginning) (region-end))
-      (insert emphasis-char origin emphasis-char))))
+;; ;;; Emphasize content by dragging the mouse
+;; (define-advice mouse-set-region (:after (click) org-highlight ())
+;;   (when (and (derived-mode-p 'org-mode)
+;;              (use-region-p))
+;;     (let ((origin (buffer-substring (region-beginning) (region-end)))
+;;           (emphasis-char "*"))
+;;       (delete-region (region-beginning) (region-end))
+;;       (insert emphasis-char origin emphasis-char))))
 (defun w/org-anki-sync-subentries ()
   "Sync all subentries of the current entry at point.
 
@@ -96,6 +97,18 @@ Also respect `org-anki-skip-function'."
   (org-anki-connect-request '(("action" . "sync"))
                             (lambda (result) (message "org anki sync succ"))
                             nil))
+
+;;; mpv
+(defun org-mpv-complete-link (&optional arg)
+  (replace-regexp-in-string
+   "file:" "mpv:"
+   (org-file-complete-link arg)
+   t t))
+(org-link-set-parameters "mpv"
+                         :follow #'mpv-play
+                         :complete #'org-mpv-complete-link)
+;; below doesn't work
+;; (add-hook 'org-open-at-point-functions #'mpv-seek-to-position-at-point)
 
 
 ;; (add-hook 'org-mode-hook #'valign-mode)

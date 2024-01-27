@@ -119,8 +119,6 @@
 (load custom-file 'noerror)
 
 ;;; UI
-(when w/theme
-  (load-theme w/theme 'no-confirm))
 ;; font & font size
 ;; http://xahlee.info/emacs/emacs/emacs_list_and_set_font.html
 (defun w/set-default-font-size (font-size)

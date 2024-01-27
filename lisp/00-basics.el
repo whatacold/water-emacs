@@ -1,4 +1,7 @@
 ;;; basics
+;; theme
+(load-theme w/theme)
+
 ;; enable these
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -32,6 +35,10 @@
 ;;
 ;; (w/auto-save-enable)
 
+;; desktop-save-mode to save info across sessions
+(setq desktop-path '("~/.emacs.local.d/"))
+(desktop-save-mode)
+
 ;; built-in auto save files
 (setq auto-save-visited-interval 2)
 (auto-save-visited-mode)
@@ -56,6 +63,13 @@
                   (apply oldfun arg)
                   (kill-buffer))))
             '((name . kill-buffer)))
+
+;;; tab-bar
+;; http://www.gonsie.com/blorg/tab-bar.html
+(setq tab-bar-close-button-show nil        ; ugly, so turned off
+      tab-bar-show 1                       ; the bar only shown when tab num > 1
+      tab-bar-select-tab-modifiers '(meta) ; Alt-1 switch to the tab numbered 1
+      tab-bar-tab-hints t)                 ; show a number on each tabs
 
 ;;; mode line
 ;; not show vc info
@@ -120,3 +134,7 @@
 ;; https://oremacs.com/2015/01/17/setting-up-ediff/
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
+
+(repeat-mode)
+
+(setq imenu-max-item-length 100)

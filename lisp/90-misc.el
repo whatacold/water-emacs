@@ -2,6 +2,10 @@
 ;;; tune built-in features
 (setq messages-buffer-max-lines 10000)
 
+(add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
+
+(setq httpd-port 8000)
+
 ;;; keycast
 (setq keycast-log-format "%-18K%C%R\n"
       keycast-log-buffer-name "*keycast by @whatacold*"
@@ -37,6 +41,7 @@
 ;;; subed
 (setq subed-loop-seconds-before 0
       subed-loop-seconds-after 0
+      subed-auto-play-media nil
       subed-default-subtitle-length 3500)
 
 ;;; OS helpers
@@ -84,3 +89,24 @@ the screen brightness as long as the input event read
                (lambda () (interactive)
                  (w/adjust-screen-brightness (abs inc))))))
          map)))))
+
+;;; org-present
+(defun w/org-present-prepare-slide (buffer-name heading)
+  ;; Show only top-level headlines
+  (org-overview)
+
+  ;; Unfold the current entry
+  (org-show-entry)
+
+  ;; Show only direct subheadings of the slide but don't expand them
+  (org-show-children))
+
+(add-hook 'org-present-after-navigate-functions
+          #'w/org-present-prepare-slide)
+;; (setq org-present-after-navigate-functions nil)
+
+;; start the initial frame maximized
+;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; start every frame maximized
+(add-to-list 'default-frame-alist '(fullscreen . fullscreen))
