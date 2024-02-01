@@ -1,3 +1,22 @@
+;; following https://www.labri.fr/perso/nrougier/GTD/index.html
+(require 'org)
+
+(setq org-directory "~/org/gtd/"
+      org-agenda-files (list "inbox.org"))
+
+;; %? the point
+;; %U inactive timestamps
+(setq org-capture-templates
+      `(("i" "Inbox" entry  (file "inbox.org")
+         ,(concat "* TODO %?\n"
+                  ;; TODO how to put the timestamp in the property drawer?
+                  "/Entered on/ %U"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+         ,(concat "* TODO Reply to \"%a\" %?\n"
+                  "/Entered on/ %U"))))
+
+(define-key global-map (kbd "C-c c") #'org-capture)
+
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
