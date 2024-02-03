@@ -8,11 +8,11 @@
       `(("i" "Inbox" entry  (file "inbox.org")
          ,(concat "* TODO %?\n"
                   ;; TODO how to put the timestamp in the property drawer?
-                  "Entered at %U"))
+                  "Captured at %U"))
         ("t" "Test Features" entry (file "inbox.org"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
          ,(concat "* TODO Reply to \"%a\" %?\n"
-                  "Entered at %U"))))
+                  "Captured at %U"))))
 
 (setq org-directory "~/org/gtd/"
       org-todo-keywords
@@ -31,42 +31,32 @@
                              "projects.org")
       org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
-         ((agenda ""
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'deadline))
-                   (org-deadline-warning-days 0)))
+         ((agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'nottodo '("NEXT")))
+                   (org-agenda-overriding-header "Deadlines")))
           (todo "NEXT"
                 ((org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'deadline))
                  (org-agenda-prefix-format "  %i %-12:c [%e] ")
-                 (org-agenda-overriding-header "\nTasks\n")))
-          (agenda nil
-                  ((org-agenda-entry-types '(:deadline))
-                   (org-agenda-format-date "")
-                   (org-deadline-warning-days 7)
-                   (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
-                   (org-agenda-overriding-header "\nDeadlines")))
-          (tags-todo "inbox"
+                 (org-agenda-overriding-header "NEXT Tasks")))
+          (tags-todo "inbox"            ; search for tag inbox?
                      ((org-agenda-prefix-format "  %?-12t% s")
-                      (org-agenda-overriding-header "\nInbox\n")))
+                      (org-agenda-overriding-header "Inbox")))
+          (agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
           (tags "CLOSED>=\"<today>\""
-                ((org-agenda-overriding-header "\nCompleted today\n"))))))
+                ((org-agenda-overriding-header "Completed today"))))))
 
       org-refile-targets
-      '(("projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)"))
+      ;; only Tasks are concerned
+      '(("projects.org" . (:regexp . "\\(?:\\(?:Task\\)s\\)")))
       org-refile-use-outline-path 'file
       org-outline-path-complete-in-steps nil)
-
-;; (define-key global-map (kbd "C-c c") #'org-capture)
-;; (define-key global-map (kbd "C-c a") 'org-agenda)
-
-;; agenda
-;; (setq org-agenda-files '("/a" "/b"))  ; set the agenda files
-
-;; (eval-after-load 'org-agenda
-;;   '(progn
-;;      (add-to-list 'org-agenda-prefix-format '(agenda . "%b%?-12t% s"))))
 
 (defun log-todo-next-creation-date (&rest ignore)
   "Log NEXT creation time in the property drawer under the key 'ACTIVATED'"
@@ -80,3 +70,8 @@
                          org-agenda-files) ; files to be staged, should be in absolute path
       org-mobile-inbox-for-pull "~/org/mobileorg-from-mobile.org"
       org-mobile-directory "~/mobileorg/") ; the staging area
+
+;;; misc
+;; ivy and refile, see https://emacs.stackexchange.com/questions/38841/counsel-m-x-always-shows
+(dolist (key '(org-refile org-capture-refile org-agenda-refile))
+  (setq ivy-initial-inputs-alist (assq-delete-all key ivy-initial-inputs-alist)))
