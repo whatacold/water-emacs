@@ -5,8 +5,9 @@
 (add-hook 'prog-mode-hook (lambda ()
                             ;; set company backends
                             (setq-local company-backends '(company-capf ; including gtags by gtags-mode
-                                                           company-files
-                                                           (company-dabbrev-code company-keywords)))
+                                                           (company-dabbrev-code company-keywords)
+                                                           company-c-headers
+                                                           company-files))
                             ;; C-x f to set the fill-column
                             (display-fill-column-indicator-mode)))
 

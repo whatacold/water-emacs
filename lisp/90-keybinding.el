@@ -58,7 +58,6 @@
 ;; (global-set-key (kbd "C-c i i") #'counsel-rg)
 
 ;;; key bindings following the convention
-(global-set-key (kbd "C-c c") #'set-mark-command) ; for MS-Windows
 (global-set-key (kbd "C-c d") #'w/duplicate-line)
 (global-set-key (kbd "C-c h") #'symbol-overlay-put)
 (global-set-key (kbd "C-c y") #'ivy-yasnippet)

@@ -4,19 +4,17 @@
       company-show-numbers t ; so that we can press M-number to choose a candidate
       company-idle-delay 0.2
       company-require-match nil
+      company-backends '(company-bbdb
+                         company-capf
+                         company-files
+                         (company-dabbrev company-ispell))
       company-minimum-prefix-length 2) ; e.g. 'fo' triggers company to start completion
 
 (add-hook 'after-init-hook 'global-company-mode)
 
 (eval-after-load 'company
   '(progn
-     (company-statistics-mode) ; suggest candidates by stats
-
-     (add-to-list 'company-backends #'company-c-headers 'append)
-
-     (when w/company-ispell-dict
-       (setq company-ispell-dictionary (file-truename w/company-ispell-dict))
-       (add-to-list 'company-backends #'company-ispell 'append))))
+     (company-statistics-mode))) ; suggest candidates by stats
 
 ;;; hippie-expand
 (setq hippie-expand-try-functions-list
