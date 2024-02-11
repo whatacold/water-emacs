@@ -37,6 +37,12 @@
 
 ;; desktop-save-mode to save info across sessions
 (setq desktop-path '("~/.emacs.local.d/"))
+(run-with-idle-timer 1 nil (lambda ()
+                             ;; Hack for the problem that
+                             ;; tab-bar-mode's C-Tab doesn't work,
+                             ;; after restoring the last desktop session.
+                             (message "Hack for tab-bar-mode and desktop")
+                             (tab-bar-mode)))
 (desktop-save-mode)
 
 ;; built-in auto save files
