@@ -37,6 +37,11 @@
                    (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'nottodo '("NEXT")))
                    (org-agenda-overriding-header "Deadlines")))
+          (agenda nil
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   ;; (org-agenda-span 3)
+                   (org-deadline-warning-days 0)))
           (todo "NEXT"
                 ((org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'deadline))
@@ -45,12 +50,11 @@
           (tags-todo "inbox"            ; search for tag inbox?
                      ((org-agenda-prefix-format "  %?-12t% s")
                       (org-agenda-overriding-header "Inbox")))
-          (agenda ""
-                  ((org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'deadline))
-                   (org-deadline-warning-days 0)))
           (tags "CLOSED>=\"<today>\""
-                ((org-agenda-overriding-header "Completed today"))))))
+                ((org-agenda-overriding-header "Completed today")))
+          (tags "project"
+                ((org-use-tag-inheritance nil)
+                 (org-agenda-overriding-header "All projects"))))))
 
       org-refile-targets
       ;; only Tasks are concerned
@@ -68,7 +72,7 @@
 ;; org-mobile for MobileOrg
 (setq org-mobile-files '("~/org/mobileorg.org" ; the capture file whose name cannot be customized
                          org-agenda-files) ; files to be staged, should be in absolute path
-      org-mobile-inbox-for-pull "~/org/mobileorg-from-mobile.org"
+      org-mobile-inbox-for-pull "~/org/gtd/inbox.org"
       org-mobile-directory "~/mobileorg/") ; the staging area
 
 ;;; misc
