@@ -1,0 +1,2 @@
+#+STARTUP: hideall
+#+TAGS:    event(e) meeting(m) deadline(d)
