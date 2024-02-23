@@ -34,14 +34,16 @@
          ((agenda nil
                   ((org-agenda-entry-types '(:deadline))
                    (org-deadline-warning-days 7)
-                   (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'nottodo '("NEXT")))
+                   ;; all states should be listed
+                   ;; (org-agenda-skip-function
+                    ;; '(org-agenda-skip-entry-if 'nottodo '("NEXT")))
                    (org-agenda-overriding-header "Deadlines")))
           (agenda nil
                   ((org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'deadline))
                    ;; (org-agenda-span 3)
-                   (org-deadline-warning-days 0)))
+                   (org-deadline-warning-days 0)
+                   (org-agenda-overriding-header "Week Agenda Excluding Deadlines")))
           (todo "NEXT"
                 ((org-agenda-skip-function
                   '(org-agenda-skip-entry-if 'deadline))
