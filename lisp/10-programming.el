@@ -20,6 +20,7 @@
                                                            (company-dabbrev-code company-keywords)
                                                            company-c-headers
                                                            company-files))
+                            (which-function-mode)
                             ;; C-x f to set the fill-column
                             (display-fill-column-indicator-mode)))
 
