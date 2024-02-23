@@ -172,6 +172,7 @@
                    quelpa
                    easy-kill
                    hydra
+                   use-package
 
                    ;; UI
                    beacon ; for fun
@@ -207,6 +208,7 @@
                    cider
                    gtags-mode
                    hl-todo
+                   ivy-xref
                    typescript-mode
                    emmet-mode ; html
                    web-mode
