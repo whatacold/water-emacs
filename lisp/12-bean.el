@@ -1,12 +1,5 @@
 ;;;; beancount stuffs
 
-;;; beancount package settings
-(add-to-list 'auto-mode-alist '("\\.beancount$" . beancount-mode))
-(setq beancount-use-ido nil
-      beancount-mode-map-prefix [(control c) (b)])
-(add-to-list 'auto-mode-alist '("\\.bean$" . beancount-mode))
-(add-hook 'beancount-mode-hook #'outline-minor-mode)
-
 ;;; beancount hacks
 (defcustom w/beancount-account-files nil
   "List of account files")
@@ -54,3 +47,26 @@
     (error "Please set `w/beancount-links-file' first"))
   (insert (ivy-read "Select one:"
                     (w/read-lines w/beancount-links-file))))
+
+;;; beancount package settings
+;; TODO make below work
+;; (use-package beancount
+;;   :init
+;;   (setq beancount-use-ido nil
+;;         beancount-mode-map-prefix [(control c) (b)])
+;;   :config
+;;   (define-key beancount-mode-map (kbd "C-c b T") #'w/beancount-insert-tag)
+;;   (define-key beancount-mode-map (kbd "C-c b L") #'w/beancount-insert-link)
+;;   :mode "\\.bean$"
+;;   :mode "\\.beancount$"
+;;   :hook (beancount-mode outline-minor-mode))
+
+(add-to-list 'auto-mode-alist '("\\.beancount$" . beancount-mode))
+(add-to-list 'auto-mode-alist '("\\.bean$" . beancount-mode))
+(setq beancount-use-ido nil
+      beancount-mode-map-prefix [(control c) (b)])
+(add-hook 'beancount-mode-hook #'outline-minor-mode)
+(eval-after-load 'beancount
+  '(progn
+     (define-key beancount-mode-map (kbd "C-c b T") #'w/beancount-insert-tag)
+     (define-key beancount-mode-map (kbd "C-c b L") #'w/beancount-insert-link)))
