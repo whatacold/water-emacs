@@ -225,34 +225,6 @@ there is a whitespace/newline and a comma before the point."
 (require 'iedit) ; will bind C-; internally
 (defalias #'cleanup-buffer #'whitespace-cleanup)
 
-;; beancount
-(add-to-list 'auto-mode-alist '("\\.beancount$" . beancount-mode))
-(setq beancount-use-ido nil
-      beancount-mode-map-prefix [(control c) (b)])
-(add-to-list 'auto-mode-alist '("\\.bean$" . beancount-mode))
-(add-hook 'beancount-mode-hook #'outline-minor-mode)
-;; beancount dirty hacks
-(defvar beancount-account-files nil
-  "List of account files")
-
-(defun w/beancount--collect-accounts-from-files (oldfun regex n)
-  (let ((keys (funcall oldfun regex n))
-        (hash (make-hash-table :test 'equal)))
-    (dolist (key keys)
-      (puthash key nil hash))
-    ;; collect accounts from files
-    (save-excursion
-      (dolist (f beancount-account-files)
-        (with-current-buffer (find-file-noselect f)
-          (goto-char (point-min))
-          (while (re-search-forward beancount-account-regexp nil t)
-            (puthash (match-string-no-properties n) nil hash)))))
-    (hash-table-keys hash)))
-
-(advice-add #'beancount-collect
-            :around #'w/beancount--collect-accounts-from-files
-            '((name . "collect accounts from files as well")))
-
 (defun w/insert-lorem ()
   (interactive)
   (insert "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem mauris, aliquam vel interdum in, faucibus non libero. Asunt in anim uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in anim id est laborum. Allamco laboris nisi ut aliquip ex ea commodo consequat."))
