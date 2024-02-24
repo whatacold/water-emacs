@@ -1,6 +1,12 @@
 ;;; basics
 (require 's) ; for e.g. writing query-replace-regexp expressions
 
+(column-number-mode)
+(global-hl-todo-mode)
+
+(require 'ws-butler)
+(add-hook 'prog-mode-hook #'ws-butler-mode)
+
 (use-package ivy-xref
   :ensure t
   :init
@@ -12,6 +18,9 @@
   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
   ;; as well
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+(use-package web-mode
+  :mode ("\\.jsx?$"))
 
 ;;; programming modes
 (add-hook 'prog-mode-hook (lambda ()

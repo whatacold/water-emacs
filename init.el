@@ -219,6 +219,7 @@
 		   go-mode
                    protobuf-mode
                    yaml-mode
+                   ws-butler
 
                    ;; misc
                    quelpa
