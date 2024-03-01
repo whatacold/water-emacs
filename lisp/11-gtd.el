@@ -5,17 +5,18 @@
 ;; %? the point
 ;; %U inactive timestamps
 (setq org-capture-templates
-      `(("i" "Inbox" entry  (file "inbox.org")
+      `(("i" "Inbox" entry  (file "~/org/gtd/inbox.org")
          ,(concat "* TODO %?\n"
                   ;; TODO how to put the timestamp in the property drawer?
                   "Captured at %U"))
-        ("t" "Test Features" entry (file "inbox.org"))
-        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+        ("t" "Test Features" entry (file "~/org/gtd/inbox.org"))
+        ("@" "Inbox [mu4e]" entry (file "~/org/gtd/inbox.org")
          ,(concat "* TODO Reply to \"%a\" %?\n"
                   "Captured at %U"))))
 
-(setq org-directory "~/org/gtd/"
-      org-todo-keywords
+;; XXX don't change org-directory, or mobileorg will result in confict
+;; after syncing back a modified org file in a sub-dir.
+(setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)"))
       org-log-done 'time
 
@@ -26,9 +27,9 @@
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c"))
-      org-agenda-files (list "inbox.org"
-                             "agenda.org"
-                             "projects.org")
+      org-agenda-files (list "~/org/gtd/inbox.org"
+                             "~/org/gtd/agenda.org"
+                             "~/org/gtd/projects.org")
       org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
          ((agenda nil
@@ -75,7 +76,7 @@
 (setq org-mobile-files '("~/org/mobileorg.org" ; the capture file whose name cannot be customized
                          org-agenda-files) ; files to be staged, should be in absolute path
       org-mobile-inbox-for-pull "~/org/gtd/inbox.org"
-      org-mobile-directory "~/mobileorg/") ; the staging area
+      org-mobile-directory "~/tmp/mobileorg-staging-area/")
 
 ;;; misc
 ;; ivy and refile, see https://emacs.stackexchange.com/questions/38841/counsel-m-x-always-shows
