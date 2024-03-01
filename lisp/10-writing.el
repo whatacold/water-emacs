@@ -4,6 +4,7 @@
       company-show-numbers t ; so that we can press M-number to choose a candidate
       company-idle-delay 0.2
       company-require-match nil
+      company-transformers '(company-sort-prefer-same-case-prefix)
       company-backends '(company-bbdb
                          company-capf
                          company-files
@@ -14,7 +15,14 @@
 
 (eval-after-load 'company
   '(progn
-     (company-statistics-mode))) ; suggest candidates by stats
+     (company-statistics-mode) ; suggest candidates based on stats
+     ;; HACK put company-sort-prefer-same-case-prefix at last, so as to
+     ;; make the same prefix candidates show first
+     (progn
+       (setq company-transformers (delq #'company-sort-prefer-same-case-prefix
+                                        company-transformers))
+       (add-to-list 'company-transformers
+                    #'company-sort-prefer-same-case-prefix 'append))))
 
 ;;; hippie-expand
 (setq hippie-expand-try-functions-list

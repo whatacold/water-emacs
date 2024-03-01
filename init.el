@@ -202,6 +202,7 @@
                    ;; sis                  ; smart input source
 
                    ;; programming
+                   bison-mode
                    company-c-headers
                    paredit
                    tiny
