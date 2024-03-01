@@ -110,3 +110,14 @@ the screen brightness as long as the input event read
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 ;; start every frame maximized
 (add-to-list 'default-frame-alist '(fullscreen . fullscreen))
+
+;;; elfeed
+(use-package elfeed
+  :init
+  (setq elfeed-curl-timeout 10
+        elfeed-search-filter "+unread"))
+
+(use-package elfeed-org
+  :init
+  (setq rmh-elfeed-org-files (list "~/org/elfeed-feeds.org"))
+  (elfeed-org))
