@@ -78,6 +78,13 @@
 ;;           (emphasis-char "*"))
 ;;       (delete-region (region-beginning) (region-end))
 ;;       (insert emphasis-char origin emphasis-char))))
+
+;;; org-anki
+;; skip empty headings
+(setq org-anki-skip-function
+      (lambda ()
+        (when (string-blank-p (substring-no-properties (org-get-entry)))
+          (org-element-property :end (org-element-at-point)))))
 (defun w/org-anki-sync-subentries ()
   "Sync all subentries of the current entry at point.
 
