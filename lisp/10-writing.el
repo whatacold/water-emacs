@@ -1,14 +1,17 @@
 ;;; company for completion
 (setq company-dabbrev-downcase nil
       company-dabbrev-ignore-case nil ; keep candidates as-is
+      ;; The dict is stolen from Chen Bin's emacs.d repo
+      company-ispell-dictionary (expand-file-name
+                                 "~/.emacs.d/data/misc/english-words.txt")
       company-show-numbers t ; so that we can press M-number to choose a candidate
-      company-idle-delay 0.2
       company-require-match nil
       company-transformers '(company-sort-prefer-same-case-prefix)
       company-backends '(company-bbdb
                          company-capf
                          company-files
                          (company-dabbrev company-ispell))
+      company-idle-delay 0.8            ; beware company-ispell may make it laggy
       company-minimum-prefix-length 2) ; e.g. 'fo' triggers company to start completion
 
 (add-hook 'after-init-hook 'global-company-mode)

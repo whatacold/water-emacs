@@ -80,9 +80,6 @@
 (defcustom w/yasnippet-dir "~/.emacs.local.d/snippets/"
   "Private yasnippet snippet dir.")
 
-(defcustom w/company-ispell-dict nil
-  "English dict file for company completion, one word per line.")
-
 ;; for package.el etc.
 (when w/http-proxy
   (setq url-proxy-services `(("http" . ,w/http-proxy)
