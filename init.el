@@ -175,6 +175,7 @@
                    use-package
 
                    ;; UI
+                   modus-themes
                    beacon ; for fun
                    cnfonts
                    delight ; for hiding specified minor modes; better than diminish

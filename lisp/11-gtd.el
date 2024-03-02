@@ -35,15 +35,14 @@
          ((agenda nil
                   ((org-agenda-entry-types '(:deadline))
                    (org-deadline-warning-days 7)
-                   ;; all states should be listed
-                   ;; (org-agenda-skip-function
-                    ;; '(org-agenda-skip-entry-if 'nottodo '("NEXT")))
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo '("DONE")))
                    (org-agenda-overriding-header "Deadlines")))
           (agenda nil
                   ((org-agenda-span 3)
                    (org-deadline-warning-days 0)
-                   ;; (org-agenda-skip-function
-                    ;; '(org-agenda-skip-entry-if 'deadline))
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo '("DONE")))
                    ;; should also include tasks having deadline
                    ;; (org-agenda-overriding-header "Week Agenda Excluding Deadlines")
                    ))
