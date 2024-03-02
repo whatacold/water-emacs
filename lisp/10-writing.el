@@ -200,6 +200,100 @@ Note that it only extracts tags from lines like the below:
                 scss-mode-hook))
   (add-hook hook #'yas-minor-mode))
 
+(require 'ivy-yasnippet)
+(defvar ivy-yasnippet--history nil)
+;; HACK better to use :preselect, so that if the default is not
+;; something you want, you dont need to delete them at first.  Also
+;; consider this senario, the user type foo for the current session,
+;; and select foob from two candidates fooa and foob, we should handle
+;; it correctly so that foob is preselected next time.
+(defun ivy-yasnippet ()
+  "Read a snippet name from the minibuffer and expand it at point.
+The completion is done using `ivy-read'.
+
+In the minibuffer, each time selection changes, the selected
+snippet is temporarily expanded at point for preview.
+
+If text before point matches snippet key of any candidate, that
+candidate will be initially selected, unless variable
+`ivy-yasnippet-expand-keys' is set to nil."
+  (interactive)
+  (barf-if-buffer-read-only)
+  (unless yas-minor-mode
+    (error "`yas-minor-mode' not enabled in current buffer"))
+  (let* ((ivy-yasnippet--buffer (current-buffer))
+
+	 (ivy-yasnippet--region
+	  (if (region-active-p)
+	      (cons (region-beginning) (region-end))
+	    (cons (point) (point))))
+	 (ivy-yasnippet--region-contents
+	  (buffer-substring (car ivy-yasnippet--region)
+			    (cdr ivy-yasnippet--region)))
+
+	 (key-info (yas--templates-for-key-at-point))
+	 (ivy-yasnippet--key
+	  (and key-info
+	       (buffer-substring (cadr key-info) (cl-caddr key-info))))
+	 (templates-for-key-at-point (mapcar #'cdr (car key-info)))
+	 (ivy-yasnippet--key-deleted nil)
+	 (ivy-yasnippet--should-delete-key
+	  (memq ivy-yasnippet-expand-keys '(always smart)))
+
+	 (ivy-yasnippet--template-alist
+	  (mapcar (lambda (template)
+		    (cons (yas--template-name template) template))
+		  (yas--all-templates (yas--get-snippet-tables))))
+
+	 (modified-flag (buffer-modified-p))
+
+	 candidates selection)
+    (let ((buffer-undo-list t))
+      (setq candidates
+	    (-map #'car
+		  (-flatten
+		   (-map (-partial #'-sort (lambda (a b)
+					     (string-lessp (car a) (car b))))
+			 (-separate
+			  (-lambda ((_ . template))
+			    (memq template templates-for-key-at-point))
+			  ivy-yasnippet--template-alist)))))
+
+      (unwind-protect
+	  (let ((buffer-read-only t))
+	    (ivy-read "Choose a snippet: " candidates
+		      :require-match
+		      (not ivy-yasnippet-create-snippet-if-not-matched)
+                      :history 'ivy-yasnippet--history
+                      :initial-input (when ivy-yasnippet--history
+                                       (car ivy-yasnippet--history))
+		      :update-fn #'ivy-yasnippet--update-fn
+		      :action (lambda (candidate) (setq selection candidate))
+		      :preselect
+		      (when ivy-yasnippet--key
+			(-find-index
+			 (lambda (x)
+			   (string-equal
+			    ivy-yasnippet--key
+			    (yas--template-key
+			     (ivy-yasnippet--lookup-template x))))
+			 candidates))
+		      :caller 'ivy-yasnippet))
+	(ivy-yasnippet--revert)
+	(set-buffer-modified-p modified-flag)))
+    (when selection
+      (let ((template (ivy-yasnippet--lookup-template selection)))
+	(if template
+	    (ivy-yasnippet--expand-template template)
+	  (setq template ivy-yasnippet-new-snippet)
+	  (yas-new-snippet t)
+	  (when (derived-mode-p 'snippet-mode)
+	    (yas-expand-snippet
+	     template nil nil
+	     `((name ,selection)
+	       (yas-selected-text
+		,ivy-yasnippet--region-contents)))))))))
+
 ;;; smart-input-source
 (when (w/gui-p)
   (cond
