@@ -30,6 +30,7 @@
       org-agenda-files (list "~/org/gtd/inbox.org"
                              "~/org/gtd/agenda.org"
                              "~/org/gtd/projects.org")
+      ;; https://stackoverflow.com/questions/32423127/how-to-view-the-next-days-in-org-modes-agenda
       org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
          ((agenda nil
@@ -39,7 +40,7 @@
                     '(org-agenda-skip-entry-if 'todo '("DONE")))
                    (org-agenda-overriding-header "Deadlines")))
           (agenda nil
-                  ((org-agenda-span 3)
+                  ((org-agenda-span 4)  ; at least show next monday's agenda when it's friday
                    (org-deadline-warning-days 0)
                    (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'todo '("DONE")))
