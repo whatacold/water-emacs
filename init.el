@@ -7,6 +7,9 @@
 
 (defalias 'w/gui-p #'display-graphic-p)
 
+(defun w/gnome-p ()
+  (string= "GNOME" (getenv "XDG_CURRENT_DESKTOP")))
+
 (defun w/windows-p()
   (eq system-type 'windows-nt))
 

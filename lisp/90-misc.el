@@ -48,9 +48,11 @@
 (when (w/windows-p)
   (setq visible-bell t))           ; mute the annoying bell
 
-(require 'battery)
-(when battery-status-function
-  (battery-notifier-mode))
+;; only for i3
+(unless (w/gnome-p)
+  (require 'battery)
+  (when battery-status-function
+    (battery-notifier-mode)))
 
 (defun w/adjust-screen-brightness (inc)
   "Adjust the screen brightness by INC*10%.
