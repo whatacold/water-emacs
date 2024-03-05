@@ -123,3 +123,32 @@ the screen brightness as long as the input event read
   :init
   (setq rmh-elfeed-org-files (list "~/org/elfeed-feeds.org"))
   (elfeed-org))
+
+;;; pdf-tools
+;; https://github.com/politza/pdf-tools/issues/338#issuecomment-447214217
+(defcustom w/pdf-outline-export-dir nil
+  "Export dir for org-mode files of pdf outline")
+
+(defun w/pdf-outline-export-to-org ()
+  "Export the outline of current pdf to an org mode file."
+  (interactive)
+  (let* ((pdf-buffer (current-buffer))
+         (filename (file-name-sans-extension (buffer-name pdf-buffer)))
+         (org-filename (concat filename ".org"))
+         (outline-info (pdf-info-outline pdf-buffer)))
+    (if (not outline-info)
+        (message "No outline.")
+      (with-temp-buffer
+        (org-mode)
+        (insert (concat "#+TITLE: " filename "\n\n"))
+        (dolist (item outline-info)
+          (let ((title (assoc-default 'title item))
+                (page (assoc-default 'page item))
+                (level (assoc-default 'depth item)))
+            (insert (format
+                     "%s %s\n"
+                     (make-string level ?*)
+                     title))))
+        (write-file (concat (or w/pdf-outline-export-dir default-directory)
+                            org-filename)
+                    'prompt-confirm)))))
