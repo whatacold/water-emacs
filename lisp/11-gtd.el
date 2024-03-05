@@ -17,7 +17,7 @@
 ;; XXX don't change org-directory, or mobileorg will result in confict
 ;; after syncing back a modified org file in a sub-dir.
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)"))
+      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)"))
       org-log-done 'time
 
       org-agenda-hide-tags-regexp "."   ; hide all

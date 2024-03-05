@@ -43,7 +43,7 @@
 ;;; org-mode
 (setq org-adapt-indentation nil ; don't indent to outline node level
       org-blank-before-new-entry nil    ; https://emacs.stackexchange.com/questions/14629/org-mode-level-line-spacing
-      org-startup-folded t
+      org-startup-folded 'showeverything ; better with desktop
       org-src-window-setup 'current-window ; use the current window to edit the src block
       org-edit-src-content-indentation 0)
 (org-babel-do-load-languages
