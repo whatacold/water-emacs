@@ -17,7 +17,11 @@
 ;; XXX don't change org-directory, or mobileorg will result in confict
 ;; after syncing back a modified org file in a sub-dir.
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)"))
+      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "WAIT(w)"
+                  "ASSG(a)"             ; assigned
+                  "|" "DONE(d)"
+                  ;; canceled
+                  "CNCL(c)"))
       org-log-done 'time
 
       org-agenda-hide-tags-regexp "."   ; hide all
@@ -37,13 +41,13 @@
                   ((org-agenda-entry-types '(:deadline))
                    (org-deadline-warning-days 7)
                    (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo '("DONE")))
+                    '(org-agenda-skip-entry-if 'todo '("DONE" "CNCL")))
                    (org-agenda-overriding-header "Deadlines")))
           (agenda nil
                   ((org-agenda-span 4)  ; at least show next monday's agenda when it's friday
                    (org-deadline-warning-days 0)
                    (org-agenda-skip-function
-                    '(org-agenda-skip-entry-if 'todo '("DONE")))
+                    '(org-agenda-skip-entry-if 'todo '("DONE" "CNCL")))
                    ;; should also include tasks having deadline
                    ;; (org-agenda-overriding-header "Week Agenda Excluding Deadlines")
                    ))
@@ -60,6 +64,9 @@
           (tags "project"
                 ((org-use-tag-inheritance nil)
                  (org-agenda-overriding-header "All projects"))))))
+
+      org-clock-idle-time 10
+      org-clock-mode-line-total 'current
 
       org-refile-targets
       ;; only Tasks are concerned
