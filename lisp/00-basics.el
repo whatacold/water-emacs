@@ -97,6 +97,11 @@
 ;;; dired
 (setq dired-dwim-target t
       dired-listing-switches "-alh")
+(use-package dired-recent
+  :init
+  (setq dired-recent-directories-file "~/.emacs.local.d/dired-recent-directories.el")
+  :config
+  (dired-recent-mode))
 
 ;;; ivy
 (require 'ivy-avy)

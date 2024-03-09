@@ -24,7 +24,8 @@
 ;;; save the recent file list
 (run-with-timer 600 600
                 (lambda ()
-                  (recentf-save-list)))
+                  (recentf-save-list)
+                  (dired-recent-save-list)))
 
 (defun w/do-things-when-idle ()
   (w/org-anki-sync)

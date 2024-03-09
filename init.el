@@ -176,6 +176,7 @@
                    easy-kill
                    hydra
                    use-package
+                   dired-recent
 
                    ;; UI
                    modus-themes
