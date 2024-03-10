@@ -130,6 +130,8 @@ If `specify-project-p' is non-nil, prompt users to select a project."
   ((emacs-lisp-mode clojure-mode) . enable-paredit-mode))
 
 ;;; misc
+(setq compilation-scroll-output 'first-error)
+
 (defun w/urxvt ()
   "Open a new urxvt terminal based on `default-directory' of the current buffer."
   (interactive)
