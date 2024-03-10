@@ -125,6 +125,10 @@ If `specify-project-p' is non-nil, prompt users to select a project."
              program
              (mapconcat #'w/quote-argument args " "))))
 
+(use-package paredit-mode
+  :hook
+  ((emacs-lisp-mode clojure-mode) . enable-paredit-mode))
+
 ;;; misc
 (defun w/urxvt ()
   "Open a new urxvt terminal based on `default-directory' of the current buffer."
