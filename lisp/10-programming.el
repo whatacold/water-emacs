@@ -132,6 +132,12 @@ If `specify-project-p' is non-nil, prompt users to select a project."
 ;;; misc
 (setq compilation-scroll-output 'first-error)
 
+(use-package auto-yasnippet
+  :ensure t
+  :init (setq aya-create-with-newline t)
+  :bind (("C-c s e" . aya-expand)
+         ("C-c s c" . aya-create)))
+
 (defun w/urxvt ()
   "Open a new urxvt terminal based on `default-directory' of the current buffer."
   (interactive)

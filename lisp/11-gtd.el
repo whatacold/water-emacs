@@ -61,6 +61,14 @@
                       (org-agenda-overriding-header "Inbox")))
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "Completed today")))
+          (agenda nil
+                 ((org-agenda-start-day "-14d")
+                  (org-agenda-span 14)
+                  (org-agenda-start-on-weekday 1)
+                  (org-agenda-start-with-log-mode '(closed))
+                  (org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'nottodo '("DONE")))
+                  (org-agenda-overriding-header "Completed in last week")))
           (tags "project"
                 ((org-use-tag-inheritance nil)
                  (org-agenda-overriding-header "All projects"))))))
@@ -70,7 +78,7 @@
 
       org-refile-targets
       ;; only Tasks are concerned
-      '(("projects.org" . (:regexp . "\\(?:\\(?:Task\\)s\\)")))
+      '(("~/org/gtd/projects.org" . (:regexp . "\\(?:\\(?:Task\\)s\\)")))
       org-refile-use-outline-path 'file
       org-outline-path-complete-in-steps nil)
 
