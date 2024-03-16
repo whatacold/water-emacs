@@ -116,7 +116,7 @@
 (setq smex-save-file "~/.emacs.local.d/.smex-items")
 (setq eshell-history-file-name "~/.emacs.local.d/eshell/history")
 (setq image-dired-dir "~/.emacs.local.d/image-dired/")
-(setq yas-snippet-dirs '(w/yasnippet-dir))
+(setq yas-snippet-dirs '(w/yasnippet-dir "~/.emacs.d/data/snippets/"))
 ;; https://www.reddit.com/r/emacs/comments/4q4ixw/how_to_forbid_emacs_to_touch_configuration_files/
 (setq custom-file "~/.emacs.local.d/custom-set-variables.el")
 (load custom-file 'noerror)

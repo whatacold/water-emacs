@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: alt branches
+# key: alt
+# --
+alt ${1:successful}
+    $2
+else ${3:fail1}
+    $4
+else ${5:fail2}
+    $6
+end
+$0

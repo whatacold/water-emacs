@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: GTD new project
+# key: gtd_project
+# --
+*$2 $0 [/] :project:
+:PROPERTIES:
+:CATEGORY: $1
+:VISIBILITY: hide
+:COOKIE_DATA: recursive todo
+:END:
+**$2 Tasks                                                           :tasks:
+:PROPERTIES:
+:VISIBILITY: content
+:END:

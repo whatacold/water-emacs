@@ -391,3 +391,9 @@ there is a whitespace/newline and a comma before the point."
             :require-match t
             :action (lambda (pair)
                       (insert (cdr pair)))))
+
+(use-package plantuml-mode
+  :ensure t
+  :mode ("\\.plantuml\\'" . plantuml-mode)
+  :init (add-to-list
+         'org-src-lang-modes '("plantuml" . plantuml)))
