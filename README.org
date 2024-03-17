@@ -1,1 +1,1 @@
-water emacs
+emacs config, as simple as water.

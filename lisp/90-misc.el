@@ -17,6 +17,14 @@
   '(progn
      (push '(self-insert-command nil nil) keycast-substitute-alist)))
 
+(defun w/set-selective-display-current-indent ()
+  "Turn on the selective display so as to hide lines whose indentation > point.
+
+See `set-selective-display' for docs."
+  (interactive)
+  (let ((indent (- (point) (line-beginning-position))))
+    (set-selective-display (1+ indent))))
+
 ;;; which-key displays the key bindings following your currently entered incomplete command (a prefix) in a popup
 (setq which-key-allow-imprecise-window-fit t) ; performance
 (which-key-mode)
@@ -28,6 +36,9 @@
                   (dired-recent-save-list)))
 
 (defun w/do-things-when-idle ()
+  (with-current-buffer (find-file-noselect "~/org/gtd/projects.org")
+    (org-update-statistics-cookies 'all)
+    (save-buffer))
   (w/org-anki-sync)
   (org-mobile-push))
 

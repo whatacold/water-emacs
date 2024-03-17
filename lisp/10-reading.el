@@ -10,3 +10,8 @@
   ;; use normal isearch as swiper doesn't work here
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   (require 'pdf-occur))
+
+(use-package org-noter
+  :init (setq ; org-noter-default-notes-file-names "xxx"
+         org-noter-notes-search-path "~/org/reading-note/")
+  :ensure t)
