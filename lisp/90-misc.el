@@ -140,14 +140,16 @@ the screen brightness as long as the input event read
   "Export dir for org-mode files of pdf outline")
 
 (defun w/pdf-outline-export-to-org ()
-  "Export the outline of current pdf to an org mode file."
+  "Export the outline of current pdf to an org mode file.
+
+Also take a look at `org-noter-create-skeleton'."
   (interactive)
   (let* ((pdf-buffer (current-buffer))
          (filename (file-name-sans-extension (buffer-name pdf-buffer)))
          (org-filename (concat filename ".org"))
          (outline-info (pdf-info-outline pdf-buffer)))
     (if (not outline-info)
-        (message "No outline.")
+        (error "No outline.")
       (with-temp-buffer
         (org-mode)
         (insert (concat "#+TITLE: " filename "\n\n"))
