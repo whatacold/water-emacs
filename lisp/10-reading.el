@@ -15,3 +15,7 @@
   :init (setq ; org-noter-default-notes-file-names "xxx"
          org-noter-notes-search-path "~/org/reading-note/")
   :ensure t)
+
+(use-package w3m
+  :init
+  (setq w3m-use-favicon nil))

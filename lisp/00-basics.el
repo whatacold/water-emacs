@@ -117,7 +117,12 @@
 (setq ivy-use-selectable-prompt t)
 
 ;;; magit
-(setq magit-diff-refine-hunk t)
+(use-package magit
+  :ensure t
+  :init (setq magit-diff-refine-hunk t)
+  :bind (:map magit-mode-map
+              ;; reserved for tab-bar-mode
+              ("C-<tab>" . nil)))
 
 ;;; others
 (defun w/duplicate-line(comment-first)
