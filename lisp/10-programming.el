@@ -164,7 +164,7 @@ If `specify-project-p' is non-nil, prompt users to select a project."
                       "~/.emacs.local.d/tempel-templates/*.eld"))
 
   ;; Setup completion at point
-  (defun tempel-setup-capf ()
+  (defun w/tempel-setup-capf ()
     ;; Add the Tempel Capf to `completion-at-point-functions'.
     ;; `tempel-expand' only triggers on exact matches. Alternatively use
     ;; `tempel-complete' if you want to see all matches, but then you
@@ -173,12 +173,12 @@ If `specify-project-p' is non-nil, prompt users to select a project."
     ;; `tempel-expand' *before* the main programming mode Capf, such
     ;; that it will be tried first.
     (setq-local completion-at-point-functions
-                (cons #'tempel-expand
+                (cons #'tempel-complete
                       completion-at-point-functions)))
 
-  (add-hook 'prog-mode-hook 'tempel-setup-capf)
-  (add-hook 'conf-mode-hook 'tempel-setup-capf)
-  (add-hook 'text-mode-hook 'tempel-setup-capf)
+  (add-hook 'prog-mode-hook #'w/tempel-setup-capf)
+  (add-hook 'conf-mode-hook #'w/tempel-setup-capf)
+  (add-hook 'text-mode-hook #'w/tempel-setup-capf)
 
   ;; Optionally make the Tempel templates available to Abbrev,
   ;; either locally or globally. `expand-abbrev' is bound to C-x '.
