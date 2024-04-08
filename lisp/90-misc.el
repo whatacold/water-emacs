@@ -17,6 +17,10 @@
   '(progn
      (push '(self-insert-command nil nil) keycast-substitute-alist)))
 
+(use-package bbdb
+  :init
+  (setq bbdb-file "~/org/bbdb.eld"))
+
 (defun w/set-selective-display-current-indent ()
   "Turn on the selective display so as to hide lines whose indentation > point.
 
