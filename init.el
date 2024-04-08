@@ -86,6 +86,11 @@
 (defcustom w/yasnippet-dir "~/.emacs.local.d/snippets/"
   "Private yasnippet snippet dir.")
 
+(defcustom w/enable-battery-notifier-p t
+  "Whether to enable battery-notifier or not.
+
+Work around its incompatibility with desktop.")
+
 ;; for package.el etc.
 (when w/http-proxy
   (setq url-proxy-services `(("http" . ,w/http-proxy)
