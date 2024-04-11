@@ -17,6 +17,16 @@
   '(progn
      (push '(self-insert-command nil nil) keycast-substitute-alist)))
 
+(use-package emacs-everywhere
+  :ensure t
+  :init
+  ;; tune hooks
+  (add-hook 'emacs-everywhere-mode-hook #'auto-fill-mode)
+  ;; (remove-hook 'emacs-everywhere-init-hooks #'emacs-everywhere-init-spell-check)
+  ;; (remove-hook 'emacs-everywhere-final-hooks #'emacs-everywhere-convert-org-to-gfm)
+  ;; workaround the problem that alt+tab won't work after auto paste
+  (setq emacs-everywhere-paste-command nil))
+
 (use-package bbdb
   :init
   (setq bbdb-file "~/org/bbdb.eld"))
