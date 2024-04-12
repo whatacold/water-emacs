@@ -31,6 +31,10 @@
   :init
   (setq bbdb-file "~/org/bbdb.eld"))
 
+(use-package org-clock
+  :init
+  (setq org-clock-sound t))
+
 (defun w/set-selective-display-current-indent ()
   "Turn on the selective display so as to hide lines whose indentation > point.
 

@@ -1,9 +1,9 @@
 (use-package pdf-tools
-  :ensure t
+  ;; :ensure t
   :pin manual ; don't reinstall when package updates
   :mode  ("\\.pdf\\'" . pdf-view-mode)
   :config
-  (setq-default pdf-view-display-size 'fit-page)
+  ;; (setq-default pdf-view-display-size 'fit-page)
   ;; ;; automatically annotate highlights
   ;; (setq pdf-annot-activate-created-annotations t)
   (pdf-tools-install 'no-query)
