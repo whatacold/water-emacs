@@ -49,12 +49,17 @@ See `set-selective-display' for docs."
                   (recentf-save-list)
                   (dired-recent-save-list)))
 
+(defcustom w/do-things-when-idle-hooks nil
+  "Things to do when Emacs is idle.")
+
 (defun w/do-things-when-idle ()
-  (with-current-buffer (find-file-noselect "~/org/gtd/projects.org")
-    (org-update-statistics-cookies 'all)
-    (save-buffer))
-  (w/org-anki-sync)
-  (org-mobile-push))
+  (run-hooks 'w/do-things-when-idle-hooks))
+
+(add-hook 'w/do-things-when-idle-hooks
+          (lambda ()
+            (with-current-buffer (find-file-noselect "~/org/gtd/projects.org")
+              (org-update-statistics-cookies 'all)
+              (save-buffer))))
 
 (run-with-idle-timer 1800 'repeat #'w/do-things-when-idle)
 
