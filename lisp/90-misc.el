@@ -20,18 +20,24 @@
 (use-package emacs-everywhere
   :ensure t
   :init
-  ;; workaround the problem that alt+tab won't work after auto paste
-  (setq emacs-everywhere-paste-command nil
-        emacs-everywhere-final-hooks '(emacs-everywhere-convert-org-to-gfm
-                                       emacs-everywhere-remove-trailing-whitespace))
-  (add-to-list 'emacs-everywhere-frame-parameters '(fullscreen . nil))
-  (add-to-list 'emacs-everywhere-frame-parameters '(width . 80))
-  (add-to-list 'emacs-everywhere-frame-parameters '(height . 50))
-
   (defun w/emacs-everywhere-workaround-gnome-frame ()
     "Workaround a problem in GNOME and/or Emacs."
     ;; even so, the width parameter doesn't take effect!
     (modify-frame-parameters (selected-frame) emacs-everywhere-frame-parameters))
+
+  (defun w/emacs-everywhere-copy-org-buffer ()
+    "Copy the current buffer."
+    (copy-region-as-kill (point-min) (point-max)))
+
+  ;; workaround the problem that alt+tab won't work after auto paste
+  (setq emacs-everywhere-paste-command nil
+        emacs-everywhere-final-hooks '(w/emacs-everywhere-copy-org-buffer
+                                       emacs-everywhere-convert-org-to-gfm
+                                       emacs-everywhere-remove-trailing-whitespace))
+  (add-to-list 'emacs-everywhere-frame-parameters '(fullscreen . nil))
+  (add-to-list 'emacs-everywhere-frame-parameters '(width . 80))
+  (add-to-list 'emacs-everywhere-frame-parameters '(height . 50))
+  (add-to-list 'emacs-everywhere-markdown-windows "Emacs China")
 
   (add-hook 'emacs-everywhere-mode-hook #'auto-fill-mode)
   (add-hook 'emacs-everywhere-init-hooks #'w/emacs-everywhere-workaround-gnome-frame)
