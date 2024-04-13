@@ -162,6 +162,7 @@ If `specify-project-p' is non-nil, prompt users to select a project."
   :init
   (setq tempel-path '("~/.emacs.d/data/tempel-templates/*.eld"
                       "~/.emacs.local.d/tempel-templates/*.eld"))
+  (add-to-list 'auto-mode-alist '("\\.eld\\'" . emacs-lisp-mode))
 
   ;; Setup completion at point
   (defun w/tempel-setup-capf ()
