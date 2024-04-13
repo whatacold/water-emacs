@@ -20,12 +20,26 @@
 (use-package emacs-everywhere
   :ensure t
   :init
-  ;; tune hooks
-  (add-hook 'emacs-everywhere-mode-hook #'auto-fill-mode)
-  ;; (remove-hook 'emacs-everywhere-init-hooks #'emacs-everywhere-init-spell-check)
-  ;; (remove-hook 'emacs-everywhere-final-hooks #'emacs-everywhere-convert-org-to-gfm)
   ;; workaround the problem that alt+tab won't work after auto paste
-  (setq emacs-everywhere-paste-command nil))
+  (setq emacs-everywhere-paste-command nil
+        emacs-everywhere-final-hooks '(emacs-everywhere-convert-org-to-gfm
+                                       emacs-everywhere-remove-trailing-whitespace))
+  (add-to-list 'emacs-everywhere-frame-parameters '(fullscreen . nil))
+  (add-to-list 'emacs-everywhere-frame-parameters '(width . 80))
+  (add-to-list 'emacs-everywhere-frame-parameters '(height . 50))
+
+  (defun w/emacs-everywhere-workaround-gnome-frame ()
+    "Workaround a problem in GNOME and/or Emacs."
+    ;; even so, the width parameter doesn't take effect!
+    (modify-frame-parameters (selected-frame) emacs-everywhere-frame-parameters))
+
+  (add-hook 'emacs-everywhere-mode-hook #'auto-fill-mode)
+  (add-hook 'emacs-everywhere-init-hooks #'w/emacs-everywhere-workaround-gnome-frame)
+  ;; (add-hook 'emacs-everywhere-final-hooks
+  ;;           (lambda ()
+  ;;             (emacs-everywhere-remove-trailing-whitespace))
+  ;;           'append)
+  )
 
 (use-package bbdb
   :init
@@ -143,10 +157,8 @@ the screen brightness as long as the input event read
 ;; (setq org-present-after-navigate-functions nil)
 
 ;; start the initial frame maximized
-;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-;; start every frame maximized
-(add-to-list 'default-frame-alist '(fullscreen . fullscreen))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;;; elfeed
 (use-package elfeed
