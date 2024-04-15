@@ -23,16 +23,19 @@
   :mode ("\\.jsx?$"))
 
 ;;; programming modes
-(add-hook 'prog-mode-hook (lambda ()
-                            ;; set company backends
-                            (setq-local company-backends '(company-capf ; including gtags by gtags-mode
-                                                           company-yasnippet
-                                                           (company-dabbrev-code company-keywords)
-                                                           company-c-headers
-                                                           company-files))
-                            (which-function-mode)
-                            ;; C-x f to set the fill-column
-                            (display-fill-column-indicator-mode)))
+(defun w/prog-mode-setup ()
+  ;; set company backends
+  (setq-local company-backends '((company-dabbrev-code
+                                  company-keywords
+                                  company-c-headers
+                                  company-capf ; for gtags-mode, tempel
+                                  company-yasnippet)
+                                 company-files))
+  (which-function-mode)
+  ;; C-x f to set the fill-column
+  (display-fill-column-indicator-mode))
+
+(add-hook 'prog-mode-hook #'w/prog-mode-setup)
 
 ;;; project
 (defun w/project-try-local (dir)
