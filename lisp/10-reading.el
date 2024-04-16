@@ -7,13 +7,14 @@
   ;; ;; automatically annotate highlights
   ;; (setq pdf-annot-activate-created-annotations t)
   (pdf-tools-install 'no-query)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-themed-minor-mode)
   ;; use normal isearch as swiper doesn't work here
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   (require 'pdf-occur))
 
 (use-package org-noter
   :init (setq ; org-noter-default-notes-file-names "xxx"
-         org-noter-notes-search-path "~/org/reading-note/")
+         org-noter-notes-search-path (list w/pdf-outline-export-dir)
   :ensure t)
 
 (use-package w3m

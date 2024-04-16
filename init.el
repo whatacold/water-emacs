@@ -80,6 +80,9 @@
                          ((member "Symbola" (font-family-list)) "Symbola"))
   "Emoji font.")
 
+(defcustom w/pdf-outline-export-dir "~/org/reading-note/"
+  "Export dir for org-mode files of pdf outline")
+
 (defcustom w/python-venv nil
   "The Python virtual environment.")
 

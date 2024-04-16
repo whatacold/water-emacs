@@ -179,9 +179,6 @@ the screen brightness as long as the input event read
 
 ;;; pdf-tools
 ;; https://github.com/politza/pdf-tools/issues/338#issuecomment-447214217
-(defcustom w/pdf-outline-export-dir nil
-  "Export dir for org-mode files of pdf outline")
-
 (defun w/pdf-outline-export-to-org ()
   "Export the outline of current pdf to an org mode file.
 
