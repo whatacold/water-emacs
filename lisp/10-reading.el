@@ -15,6 +15,7 @@
 (use-package org-noter
   :init (setq ; org-noter-default-notes-file-names "xxx"
          org-noter-notes-search-path (list w/pdf-outline-export-dir)
+         org-noter-doc-split-fraction '(0.6 . 0.5))
   :ensure t)
 
 (use-package w3m
