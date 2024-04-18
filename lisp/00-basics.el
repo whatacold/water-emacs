@@ -72,10 +72,19 @@
 
 ;;; tab-bar
 ;; http://www.gonsie.com/blorg/tab-bar.html
-(setq tab-bar-close-button-show nil        ; ugly, so turned off
-      tab-bar-show 1                       ; the bar only shown when tab num > 1
-      tab-bar-select-tab-modifiers '(meta) ; Alt-1 switch to the tab numbered 1
-      tab-bar-tab-hints t)                 ; show a number on each tabs
+(use-package tab-bar
+  :init
+  (setq tab-bar-close-button-show nil        ; ugly, so turned off
+        tab-bar-show 1                       ; the bar only shown when tab num > 1
+        tab-bar-select-tab-modifiers '(meta) ; Alt-1 switch to the tab numbered 1
+        tab-bar-tab-hints t)                 ; show a number for each tab
+
+  (defun w/tab-bar-rename-after-create (&rest _)
+    "Rename the just created tab."
+    (call-interactively #'tab-bar-rename-tab))
+  :config
+  (advice-add #'tab-bar-new-tab :after #'w/tab-bar-rename-after-create))
+
 
 ;;; mode line
 ;; not show vc info

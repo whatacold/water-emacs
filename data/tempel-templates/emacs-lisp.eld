@@ -26,8 +26,17 @@ emacs-lisp-mode
 (dolist "(dolist (" p ")" n> r> ")")
 (loop "(cl-loop for " p " in " p " do" n> r> ")")
 (command "(defun " p " (" p ")\n  \"" p "\"" n> "(interactive" p ")" n> r> ")")
-(advice "(defun " (p "adv" name) " (&rest app)" n> p n> "(apply app))" n>
-        "(advice-add #'" (p "fun") " " (p ":around") " #'" (s name) ")")
+
+(advice "(defun " (p "adv" name) " (&rest app)"
+        n> p n> "(apply app))" n>
+        "(advice-add #'" (p "fun") " :"
+        (p (completing-read "where: "
+                            (list "before"
+                                  "after"
+                                  "around"
+                                  "override")))
+        " #'" (s name) ")")
+
 (header ";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name)))
         " -- " p " -*- lexical-binding: t -*-" n
         ";;; Commentary:" n ";;; Code:" n n)
