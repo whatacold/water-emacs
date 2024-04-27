@@ -7,6 +7,20 @@
 (require 'ws-butler)
 (add-hook 'prog-mode-hook #'ws-butler-mode)
 
+(use-package eshell
+  :init
+  (setq eshell-destroy-buffer-when-process-dies t)
+  :hook
+  ((eshell-mode) . (lambda ()
+                     (eshell/alias "ll" "ls -l $*"))))
+
+(use-package em-term
+  :after eshell
+  :config
+  (add-to-list 'eshell-visual-commands "vim")
+  (add-to-list 'eshell-visual-subcommands (list "git" "log" "diff" "show"))
+  (add-to-list 'eshell-visual-options '("git" "--help" "--paginate")))
+
 (use-package ivy-xref
   :ensure t
   :init
