@@ -121,6 +121,30 @@
 (add-to-list 'ivy-more-chars-alist '(counsel-ag . 2))
 (add-to-list 'ivy-more-chars-alist '(counsel-rg . 2))
 
+(defun w/counsel-find-file-string< (x y)
+  "Always show '.foo' after 'foo'."
+  (if (s-starts-with-p "." x)
+      (if (s-starts-with-p "." y)
+          (string< x y)
+        nil)
+    (if (s-starts-with-p "." y)
+        t
+      (string< x y))))
+
+;;; inspired by https://github.com/abo-abo/swiper/issues/723
+;;; don't know why below isn't sufficient
+;; (add-to-list 'ivy-sort-functions-alist (cons 'counsel-find-file
+                                             ;; #'w/counsel-find-file-string<))
+
+(defun w/counsel-find-file-sort (_name candidates)
+  (cl-sort (copy-sequence candidates)
+           (lambda (f1 f2)
+             (w/counsel-find-file-string< f1 f2))))
+
+(add-to-list 'ivy-sort-matches-functions-alist
+             (cons 'counsel-find-file
+                   #'w/counsel-find-file-sort))
+
 ;; Press C-p and Enter to select current input as candidate
 ;; https://oremacs.com/2017/11/30/ivy-0.10.0/
 (setq ivy-use-selectable-prompt t)
