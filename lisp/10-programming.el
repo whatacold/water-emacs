@@ -89,7 +89,23 @@ If `specify-project-p' is non-nil, prompt users to select a project."
 (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
 
 ;;; eglot
-(setq eldoc-echo-area-use-multiline-p nil)
+(use-package eglot
+  :init
+  (setq eldoc-echo-area-use-multiline-p nil)
+  ;; for java
+  (defcustom w/java-jdt-lsp-ls-jar nil
+    "The path for Java JDT LSP server jar.
+
+Download one at https://download.eclipse.org/jdtls/milestones/")
+
+  (when w/java-jdt-lsp-ls-jar
+    (setenv "CLASSPATH" (concat (expand-file-name w/java-jdt-lsp-ls-jar)
+                                (when (getenv "CLASSPATH")
+                                  ":")
+                                (getenv "CLASSPATH"))))
+  :bind
+  (("C-c <tab>" . #'company-complete) ; initiate the completion manually
+   ("C-c e r" . #'eglot-rename)))
 
 ;;; C/C++
 (use-package smartparens

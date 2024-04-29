@@ -13,3 +13,5 @@ eshell-mode
              " -DartifactId="
              app
              " -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false")
+
+(mvnrun "mvn exec:java -Dexec.mainClass='io.whatacold." (p "app name") ".App'" q)

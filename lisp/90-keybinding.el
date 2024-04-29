@@ -80,11 +80,5 @@
 (global-set-key (kbd "C-c o i") #'org-download-image)
 (global-set-key (kbd "C-c o y") #'org-download-clipboard) ; y as in yank/C-y
 
-;; eglot
-(eval-after-load 'eglot
-  '(progn
-     (define-key eglot-mode-map (kbd "C-c <tab>") #'company-complete) ; initiate the completion manually
-     (define-key eglot-mode-map (kbd "C-c e r") #'eglot-rename)))
-
 ;; project.el
 (define-key project-prefix-map "i" #'w/project-rg)

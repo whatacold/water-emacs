@@ -50,6 +50,7 @@
  'org-babel-load-languages
  '((python . t)
    (C . t)
+   (java . t)
    (emacs-lisp . t)))
 (setq-default org-download-image-dir "~/org/images/"
               org-download-heading-lvl nil)
