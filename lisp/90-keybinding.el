@@ -57,10 +57,12 @@
 (global-set-key (kbd "C-c i r") #'ivy-resume)
 ;; (global-set-key (kbd "C-c i i") #'counsel-rg)
 
-;;; key bindings following the convention
+;;; key bindings following the C-c convention
+(global-set-key (kbd "C-c b r") #'w/rename-this-file-and-buffer)
 (global-set-key (kbd "C-c d") #'w/duplicate-line)
 (global-set-key (kbd "C-c h") #'symbol-overlay-put)
 (global-set-key (kbd "C-c s y") #'ivy-yasnippet)
+(global-set-key (kbd "C-c s s") #'scratch)
 (global-set-key [f8] #'compile)
 
 ;; jumping around
