@@ -10,6 +10,18 @@
 (use-package eshell
   :init
   (setq eshell-destroy-buffer-when-process-dies t)
+
+  (defun w/eshell-cwd ()
+    "Create a new eshell based on CWD."
+    (interactive)
+    (defvar eshell-buffer-name)         ; defined in eshell
+    (let* ((eshell-buffer-name (format "*eshell-cwd-%s*" default-directory))
+           (buffer (get-buffer eshell-buffer-name)))
+      (if buffer
+          (pop-to-buffer-same-window buffer)
+        (eshell t))))
+  :bind (("C-c e c" . #'w/eshell-cwd))
+
   :hook
   ((eshell-mode) . (lambda ()
                      (eshell/alias "ll" "ls -l $*"))))
