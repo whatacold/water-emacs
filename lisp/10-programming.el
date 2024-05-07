@@ -20,7 +20,7 @@
       (if buffer
           (pop-to-buffer-same-window buffer)
         (eshell t))))
-  :bind (("C-c e c" . #'w/eshell-cwd))
+  :bind (("C-c t c" . #'w/eshell-cwd))
 
   :hook
   ((eshell-mode) . (lambda ()
@@ -134,6 +134,7 @@ Download one at https://download.eclipse.org/jdtls/milestones/")
 (defun w/c-mode-common-buffer-init ()
   (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
     (gtags-mode)
+    (define-key c++-mode-map (kbd "C-<down-mouse-1>") #'xref-find-definitions)
     (require 'smartparens-c)
     (smartparens-mode)))
 

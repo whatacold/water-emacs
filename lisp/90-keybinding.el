@@ -63,6 +63,7 @@
 (global-set-key (kbd "C-c h") #'symbol-overlay-put)
 (global-set-key (kbd "C-c s y") #'ivy-yasnippet)
 (global-set-key (kbd "C-c s s") #'scratch)
+(global-set-key (kbd "C-c t u") #'w/urxvt)
 (global-set-key [f8] #'compile)
 
 ;; jumping around
@@ -74,6 +75,8 @@
 (global-set-key (kbd "C-c j p") #'flymake-goto-prev-error)
 (global-set-key (kbd "C-c j n") #'flymake-goto-next-error)
 (global-set-key (kbd "C-c j t") #'ff-find-other-file)
+
+(global-set-key (kbd "C-c k") #'easy-kill)
 
 ;; org-mode
 (global-set-key (kbd "C-c o c") #'org-capture)

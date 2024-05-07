@@ -34,6 +34,7 @@
         emacs-everywhere-final-hooks '(w/emacs-everywhere-copy-org-buffer
                                        emacs-everywhere-convert-org-to-gfm
                                        emacs-everywhere-remove-trailing-whitespace))
+  :config
   (add-to-list 'emacs-everywhere-frame-parameters '(fullscreen . nil))
   (add-to-list 'emacs-everywhere-frame-parameters '(width . 80))
   (add-to-list 'emacs-everywhere-frame-parameters '(height . 50))
