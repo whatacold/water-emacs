@@ -244,6 +244,7 @@ Work around its incompatibility with desktop.")
                    docker
                    battery-notifier
                    org-anki
+                   request
                    ))
     (when (and (not (assoc pkg package-archive-contents))
                (not refreshed-p))

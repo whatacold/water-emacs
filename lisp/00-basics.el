@@ -6,6 +6,7 @@
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+(setq blink-cursor-blinks 0)
 (setq initial-scratch-message nil)
 (setq kill-ring-max 1000)
 (setq-default indent-tabs-mode nil) ; no TAB
