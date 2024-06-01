@@ -95,6 +95,14 @@
       org-mobile-inbox-for-pull "~/org/gtd/inbox.org"
       org-mobile-directory "~/tmp/mobileorg-staging-area/")
 
+(defun w/org-mobile-sync-query ()
+  "Query user when killing Emacs about whether files have been sync'ed.
+
+This function is added to `kill-emacs-query-functions'."
+  (yes-or-no-p "Have org mobiles files been sync'ed? "))
+
+(add-hook 'kill-emacs-query-functions #'w/org-mobile-sync-query)
+
 ;;; misc
 ;; ivy and refile, see https://emacs.stackexchange.com/questions/38841/counsel-m-x-always-shows
 (dolist (key '(org-refile org-capture-refile org-agenda-refile))
