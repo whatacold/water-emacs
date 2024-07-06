@@ -53,8 +53,8 @@
 (setq set-mark-command-repeat-pop t) ; C-u SPC SPC goes to the last last mark
 
 ;;; coding system
-(prefer-coding-system 'chinese-gbk)
-(prefer-coding-system 'utf-8)
+(prefer-coding-system 'chinese-gbk-unix)
+(prefer-coding-system 'utf-8-unix)
 (modify-coding-system-alist 'file "\\.sh\\'" 'unix)
 
 ;;; windows
@@ -149,6 +149,12 @@
 ;; Press C-p and Enter to select current input as candidate
 ;; https://oremacs.com/2017/11/30/ivy-0.10.0/
 (setq ivy-use-selectable-prompt t)
+
+;; so as to filter it by tags like +foo+bar-baz
+(push '(org-agenda . completing-read-default)
+      ivy-completing-read-handlers-alist)
+(push '(org-tags-view . completing-read-default)
+      ivy-completing-read-handlers-alist)
 
 ;;; magit
 (use-package magit
