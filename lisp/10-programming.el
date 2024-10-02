@@ -188,6 +188,12 @@ Download one at https://download.eclipse.org/jdtls/milestones/")
   :hook
   ((emacs-lisp-mode clojure-mode) . enable-paredit-mode))
 
+;;; Clojure
+(use-package clay
+  :after cider
+  :bind (:map clojure-mode-map
+              ("C-c c x" . clay-make-defun-at-point)))
+
 ;;; misc
 (setq compilation-scroll-output 'first-error)
 
