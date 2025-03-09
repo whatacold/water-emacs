@@ -3,6 +3,9 @@ fundamental-mode ;; Available everywhere
 
 (today (format-time-string "%Y-%m-%d"))
 (time (format-time-string "%Y-%m-%d %H:%m:%S"))
+(todo "TODO")
+(clj "Clojure")
+(cljs "ClojureScript")
 
 prog-mode
 

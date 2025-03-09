@@ -186,7 +186,7 @@ Note that it only extracts tags from lines like the below:
 (defun w/hugo-current-time ()
   "Get timestamp for hugo."
   (let ((tz (format-time-string "%z")))
-    (insert (format-time-string "%Y-%m-%dT%T")
+    (concat (format-time-string "%Y-%m-%dT%T")
             (substring tz 0 3) ":" (substring tz 3 5))))
 
 (add-hook 'before-save-hook #'w/hugo-update-lastmod)
